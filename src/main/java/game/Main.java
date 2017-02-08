@@ -2,7 +2,8 @@ package game;
 
 import engine.GameEngine;
 import engine.Scene;
- 
+import game.scenes.GameScene;
+
 public class Main {
  
     public static void main(String[] args) {

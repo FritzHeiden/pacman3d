@@ -17,7 +17,7 @@ public class Renderer {
     /**
      * Field of View in Radians
      */
-    private static final float FOV = (float) Math.toRadians(60.0f);
+    private static final float FOV = (float) Math.toRadians(65.0f);
 
     private static final float Z_NEAR = 0.01f;
 
