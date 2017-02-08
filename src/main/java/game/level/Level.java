@@ -76,4 +76,12 @@ public class Level {
     public void setLevel(int[][] level) {
         this.level = level;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

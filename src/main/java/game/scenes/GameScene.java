@@ -1,4 +1,4 @@
-package game;
+package game.scenes;
 
 import engine.Entity;
 import engine.MouseInput;
@@ -6,6 +6,7 @@ import engine.Scene;
 import engine.Window;
 import engine.graph.Camera;
 import engine.graph.PointLight;
+import game.Renderer;
 import game.entities.Ghost;
 import game.entities.Pacman;
 import game.level.Level;
@@ -45,8 +46,12 @@ public class GameScene implements Scene {
         // Load Level
         this.level = LevelLoader.load("/level/maze.txt");
 
+        camera.setPosition(level.getWidth() / 2 * .2f, 4, level.getHeight() / 2 * .2f);
+        camera.setRotation(90f, 0, 0);
+
         // Make entities
         Pacman pacman = new Pacman();
+        pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED);
@@ -64,8 +69,6 @@ public class GameScene implements Scene {
         Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE);
         turquoiseGhost.setPosition(3f, 0, -4);
         this.entities.add(turquoiseGhost);
-
-
 
         ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
 
@@ -102,6 +105,7 @@ public class GameScene implements Scene {
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        pointLights.get(0).setPosition(camera.getPosition());
 
 //        for (Entity entity : entities) {
 //            if (entity instanceof Pacman) {

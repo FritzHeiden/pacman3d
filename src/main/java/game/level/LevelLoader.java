@@ -16,7 +16,6 @@ public class LevelLoader {
 
         for (int y = 0; y < lines.size(); y ++) {
             String line = lines.get(y).replaceAll(" ", "");
-            System.out.println(line);
             for (int x = 0; x < line.length(); x ++) {
                 switch(line.charAt(x)) {
                     case '0':
