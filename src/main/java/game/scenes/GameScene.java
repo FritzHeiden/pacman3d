@@ -29,6 +29,7 @@ public class GameScene implements Scene {
     private ArrayList<PointLight> pointLights;
     private Level level;
     private static final float CAMERA_POS_STEP = 0.05f;
+    private Pacman pacman;
 
     public GameScene() {
         renderer = new Renderer();
@@ -50,7 +51,7 @@ public class GameScene implements Scene {
         camera.setRotation(90f, 0, 0);
 
         // Make entities
-        Pacman pacman = new Pacman();
+        pacman = new Pacman(this.level.getNodeList().get(1), window);
         pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
         this.entities.add(pacman);
 
@@ -70,7 +71,7 @@ public class GameScene implements Scene {
         turquoiseGhost.setPosition(3f, 0, -4);
         this.entities.add(turquoiseGhost);
 
-        ambientLight = new Vector3f(0.3f, 0.3f, 0.3f);
+        ambientLight = new Vector3f(0.6f, 0.6f, 0.6f);
 
         Vector3f lightColour = new Vector3f(1, 1, 1);
         Vector3f lightPosition = new Vector3f(camera.getPosition()).add(0, 1.5f, 0);
@@ -106,6 +107,7 @@ public class GameScene implements Scene {
         // Update camera position
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
         pointLights.get(0).setPosition(camera.getPosition());
+        pacman.update();
 
 //        for (Entity entity : entities) {
 //            if (entity instanceof Pacman) {
@@ -124,7 +126,8 @@ public class GameScene implements Scene {
     public void render(Window window) {
         ArrayList<Entity> allEntities = new ArrayList<>();
         allEntities.addAll(this.entities);
-        allEntities.addAll(this.level.getBlocks());
+        allEntities.addAll(this.level.getBlockList());
+//        allEntities.addAll(this.level.getNodeList());
         renderer.render(window, camera, allEntities, ambientLight, pointLights);
     }
 

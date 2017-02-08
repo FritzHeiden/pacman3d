@@ -28,6 +28,18 @@ public class Entity {
         position.y += offsetY;
     }
 
+    public void movePosition(Vector3f offset) {
+        if ( offset.z != 0 ) {
+            position.x += (float)Math.sin(Math.toRadians(rotation.y)) * -1.0f * offset.z;
+            position.z += (float)Math.cos(Math.toRadians(rotation.y)) * offset.z;
+        }
+        if ( offset.x != 0) {
+            position.x += (float)Math.sin(Math.toRadians(rotation.y - 90)) * -1.0f * offset.x;
+            position.z += (float)Math.cos(Math.toRadians(rotation.y - 90)) * offset.x;
+        }
+        position.y += offset.y;
+    }
+
     public Vector3f getPosition() {
         return position;
     }
@@ -36,6 +48,12 @@ public class Entity {
         this.position.x = x;
         this.position.y = y;
         this.position.z = z;
+    }
+
+    public void setPosition(Vector3f position) {
+        this.position.x = position.x;
+        this.position.y = position.y;
+        this.position.z = position.z;
     }
 
     public float getScale() {
@@ -59,4 +77,5 @@ public class Entity {
     public Model getModel() {
         return model;
     }
+
 }
