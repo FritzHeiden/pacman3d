@@ -12,12 +12,14 @@ public class Ghost extends Entity {
     public static final int RED = 0, ORANGE = 1, PINK = 2, TURQUOISE = 3;
 
     private int color;
+    private float speed;
 
     public Ghost(int color) throws Exception {
         super(null);
 
         this.model = OBJLoader.loadModel("/models/ghost.obj");
 
+        this.speed = .2f;
         this.color = color;
         Vector3f materialColor;
 
@@ -43,5 +45,53 @@ public class Ghost extends Entity {
         this.model.setMaterial(material);
         this.setScale(0.5f);
         this.setPosition(0, -.5f, -2);
+    }
+
+    @Override
+    public void movePosition(float offsetX, float offsetY, float offsetZ) {
+        Vector3f offset = new Vector3f(offsetX, offsetY, offsetZ);
+        if (offset.length() > 0) {
+            offset = offset.normalize();
+            offset.mul(speed);
+        }
+        super.movePosition(offset.x, offset.y, offset.z);
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    @Override
+    public Vector3f getPosition() {
+        return super.getPosition();
+    }
+
+    @Override
+    public void setPosition(float x, float y, float z) {
+        super.setPosition(x, y, z);
+    }
+
+    @Override
+    public float getScale() {
+        return super.getScale();
+    }
+
+    @Override
+    public void setScale(float scale) {
+        super.setScale(scale);
+    }
+
+    @Override
+    public Vector3f getRotation() {
+        return super.getRotation();
+    }
+
+    @Override
+    public void setRotation(float x, float y, float z) {
+        super.setRotation(x, y, z);
     }
 }

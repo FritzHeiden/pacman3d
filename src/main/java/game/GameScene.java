@@ -37,9 +37,13 @@ public class GameScene implements Scene {
         // Make entities
         Pacman pacman = new Pacman();
         Ghost redGhost = new Ghost(Ghost.RED);
+        redGhost.setPosition(-3f, 0, -4);
         Ghost pinkGhost = new Ghost(Ghost.PINK);
+        pinkGhost.setPosition(-1f, 0, -4);
         Ghost orangeGhost = new Ghost(Ghost.ORANGE);
+        orangeGhost.setPosition(1f, 0, -4);
         Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE);
+        turquoiseGhost.setPosition(3f, 0, -4);
 
         entities = new Entity[]{pacman, redGhost, pinkGhost, orangeGhost, turquoiseGhost};
 
@@ -76,7 +80,7 @@ public class GameScene implements Scene {
     @Override
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
-        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+//        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {

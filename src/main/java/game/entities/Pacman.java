@@ -15,7 +15,7 @@ public class Pacman extends Entity {
     public Pacman() throws Exception {
         super(null);
 
-        this.speed = 2f;
+        this.speed = .2f;
 
         this.model = OBJLoader.loadModel("/models/pacman.obj");
         Material material = new Material(new Vector3f(1f, 1f, 0f), 1);
@@ -28,10 +28,19 @@ public class Pacman extends Entity {
     @Override
     public void movePosition(float offsetX, float offsetY, float offsetZ) {
         Vector3f offset = new Vector3f(-offsetX, offsetY, -offsetZ);
-        offset = offset.normalize();
-        offset.mul(speed);
-        System.out.println(offset.x + "  " + offset.y + "  " + offset.z);
+        if (offset.length() > 0) {
+            offset = offset.normalize();
+            offset.mul(speed);
+        }
         super.movePosition(offset.x, offset.y, offset.z);
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     @Override
