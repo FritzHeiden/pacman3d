@@ -8,6 +8,8 @@ import engine.Utils;
 import engine.Window;
 import engine.graph.*;
 
+import java.util.ArrayList;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
@@ -55,8 +57,8 @@ public class Renderer {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public void render(Window window, Camera camera, Entity[] entities, Vector3f ambientLight,
-                       PointLight[] pointLights) {
+    public void render(Window window, Camera camera, ArrayList<Entity> entities, Vector3f ambientLight,
+                       ArrayList<PointLight> pointLights) {
 
         clear();
 
