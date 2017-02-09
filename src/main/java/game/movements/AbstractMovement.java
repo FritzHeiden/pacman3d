@@ -13,11 +13,11 @@ import java.util.Map;
  */
 public abstract class AbstractMovement {
 
-    public final Vector3f UP = new Vector3f(0, -1, 0);
-    public final Vector3f DOWN = new Vector3f (0, 1, 0);
-    public final Vector3f RIGHT = new Vector3f (-1, 0, 0);
-    public final Vector3f LEFT = new Vector3f (1, 0, 0);
-    public final Vector3f STOP = new Vector3f (1, 0, 0);
+    public final Vector3f UP = new Vector3f(0, -.01f, 0);
+    public final Vector3f DOWN = new Vector3f (0, 0, .01f);
+    public final Vector3f RIGHT = new Vector3f (0, 0, 0);
+    public final Vector3f LEFT = new Vector3f (.01f, 0, 0);
+    public final Vector3f STOP = new Vector3f (0, 0, 0);
     private final Map<String, Vector3f> directions = new HashMap<>();
 
     private Node currentNode;
@@ -29,7 +29,7 @@ public abstract class AbstractMovement {
         this.currentNode = node;
         this.target = node;
         this.movingObject = movingObject;
-        this.direction = this.STOP;
+        this.direction = this.DOWN;
 
         directions.put("UP", this.UP);
         directions.put("DOWN", this.DOWN);
@@ -57,6 +57,14 @@ public abstract class AbstractMovement {
         this.direction = direction;
     }
 
+    protected void setTarget(Node target) {
+        this.target = target;
+    }
+
+    protected void setCurrentNode(Node currentNode) {
+        this.currentNode = currentNode;
+    }
+
     public Vector3f getTargetPosition() {
         return target.getBlock().getPosition();
 
@@ -64,5 +72,9 @@ public abstract class AbstractMovement {
 
     public Vector3f getDirection() {
         return direction;
+    }
+
+    public Vector3f getCurrentPosition() {
+        return this.currentNode.getBlock().getPosition();
     }
 }

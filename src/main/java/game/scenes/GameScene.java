@@ -51,8 +51,8 @@ public class GameScene implements Scene {
         camera.setRotation(90f, 0, 0);
 
         // Make entities
-        pacman = new Pacman(this.level.getNodeList().get(1), window);
-        pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
+        pacman = new Pacman(this.level.getNodeList().get(2), window);
+//        pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED);

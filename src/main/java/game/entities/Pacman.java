@@ -47,9 +47,8 @@ public class Pacman extends Entity {
         Material material = new Material(new Vector3f(1f, 1f, 0f), 1);
 
         this.model.setMaterial(material);
-        this.setScale(0.5f);
-
-//        this.setPosition(this.currentNode.getBlock().getPosition());
+        this.setScale(0.2f);
+        this.setPosition(this.currentNode.getBlock().getPosition());
     }
 
     public void update() {

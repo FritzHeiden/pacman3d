@@ -76,6 +76,39 @@ public class Node {
             lowerNeighbor.setUpperNeighbor(this, false);
     }
 
+    public boolean hasUpperNeighbor()  {
+        return this.upperNeighbor != null;
+    }
+
+    public boolean hasLowerNeighbor() {
+        return this.lowerNeighbor != null;
+    }
+
+    public boolean hasLeftNeighbor() {
+        return this.leftNeighbor != null;
+    }
+
+    public Node getLeftNeighbor() {
+        return leftNeighbor;
+    }
+
+    public Node getRightNeighbor() {
+        return rightNeighbor;
+    }
+
+    public Node getUpperNeighbor() {
+        return upperNeighbor;
+    }
+
+    public Node getLowerNeighbor() {
+        return lowerNeighbor;
+    }
+
+    public boolean hasRightNeigbor() {
+        return this.rightNeighbor != null;
+
+    }
+
     public void setLowerNeighbor(Node lowerNeighbor) {
         this.lowerNeighbor.setLowerNeighbor(lowerNeighbor, false);
     }
