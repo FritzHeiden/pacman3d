@@ -22,7 +22,7 @@ public class KeyMovementStrategy extends AbstractMovement {
     @Override
     public void move() {
         this.keyContinuous(this.window);
-        System.out.println(this.getDirection());
+        System.out.println(this.getMovingObject().getPosition() + " " + this.getTargetPosition() + this.getMovingObject().getPosition().distance(this.getTargetPosition()));
 
         if (this.getMovingObject().getPosition().equals(this.getTargetPosition())) {
             this.setCurrentNode(this.getTarget());

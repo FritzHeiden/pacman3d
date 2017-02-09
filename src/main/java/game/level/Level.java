@@ -85,10 +85,10 @@ public class Level {
         int[] trail = {Level.NODE, Level.CONNECTOR_COL, Level.CONNECTOR_ROW};
 
         HashMap<String, Integer[]> directions = new HashMap<>();
-        directions.put("left", new Integer[] {-1, 0});
-        directions.put("right", new Integer[] {1, 0});
-        directions.put("up", new Integer[] {0, -1});
-        directions.put("down", new Integer[] {0, 1});
+        directions.put("left", new Integer[] {0, -1});
+        directions.put("right", new Integer[] {0, 1});
+        directions.put("up", new Integer[] {-1, 0});
+        directions.put("down", new Integer[] {1, 0});
 
         for (Node node: nodeList) {
             for (Map.Entry<String, Integer[]> direction: directions.entrySet()) {
@@ -105,22 +105,22 @@ public class Level {
                     break;
                 }
 
-                int val = this.level[row+rowOffset][col+colOffset];
-                int val0 = this.level[row+rowOffset][col+colOffset];
+                int val = this.level[col+colOffset][row+rowOffset];
+                int val0 = this.level[col+colOffset][row+rowOffset];
 
                 if (IntStream.of(trail).anyMatch(x -> x == val)) {
                     while (val0 == Level.CONNECTOR_COL || val == Level.CONNECTOR_ROW) {
                         rowOffset += valRow;
                         colOffset += valCol;
                         try {
-                            int except = this.level[row+rowOffset][col+colOffset];
+                            int except = this.level[col+colOffset][row+rowOffset];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             break;
                         }
-                        val0 = this.level[row+rowOffset][col+colOffset];
+                        val0 = this.level[col+colOffset][row+rowOffset];
 
                     }
-                    node.setNeighbors(new Node(this.getBlock(row+rowOffset, col+colOffset)),
+                    node.setNeighbors(new Node(this.getBlock(col+colOffset, col+colOffset)),
                             direction.getKey());
                 }
 
