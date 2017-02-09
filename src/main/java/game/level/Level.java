@@ -67,7 +67,7 @@ public class Level {
             for (int y = 0; y < this.height; y ++) {
                 Block block = new Block(x, y);
                 block.setScale(scale/2f);
-                block.setPosition(x * scale, levelHeight-.2f, y * scale);
+                block.setPosition(x * scale, levelHeight-2f, y * scale);
                 switch (this.level[x][y]) {
                     case Level.VOID:
                         block = null;

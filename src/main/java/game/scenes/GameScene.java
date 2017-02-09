@@ -133,8 +133,8 @@ public class GameScene extends Scene {
             Vector2f rotVec = mouseInput.getDisplVec();
             camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
         }
-        if (this.lives == 0)
-            this.switchScene(new MenuScene());
+        if (this.lives == 2)
+            this.switchScene(new GameOverScene());
     }
 
     @Override

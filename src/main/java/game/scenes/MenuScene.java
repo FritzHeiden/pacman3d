@@ -19,6 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class MenuScene extends Scene {
     private Renderer2D renderer;
     private final Vector3f cameraInc;
+    private Model logoModel;
 
     private ArrayList<Entity> entities;
 
@@ -34,12 +35,7 @@ public class MenuScene extends Scene {
     public void init(Window window) throws Exception {
         renderer.init(window);
 
-        Model logoModel = OBJLoader.loadModel("/models/squarePlain.obj");
-        logoModel.setMaterial(new Material(new Texture("/textures/logo.png"), 1));
-        Entity logoEntity = new Entity(logoModel);
-        logoEntity.setScale(1.20f);
-        logoEntity.setPosition(0, .2f, 0);
-        entities.add(logoEntity);
+        this.setLogoModel("/textures/logo.png");
 
         Model startModel = OBJLoader.loadModel("/models/squarePlain.obj");
         startModel.setMaterial(new Material(new Texture("/textures/start.png"), 1));
@@ -54,6 +50,15 @@ public class MenuScene extends Scene {
         quitEntity.setScale(.30f);
         quitEntity.setPosition(0, -.50f, 0);
         entities.add(quitEntity);
+    }
+
+    public void setLogoModel(String fileName) throws Exception {
+        this.logoModel = OBJLoader.loadModel("/models/squarePlain.obj");
+        logoModel.setMaterial(new Material(new Texture(fileName), 1));
+        Entity logoEntity = new Entity(logoModel);
+        logoEntity.setScale(1.20f);
+        logoEntity.setPosition(0, .2f, 0);
+        entities.add(logoEntity);
     }
 
     public void input(Window window, MouseInput mouseInput) {
