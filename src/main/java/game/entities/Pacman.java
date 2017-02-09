@@ -18,23 +18,6 @@ public class Pacman extends Entity {
     private AbstractMovement movementStrategy;
 
 
-    public Pacman() throws Exception {
-        super(null);
-
-
-//        this.currentNode = node;
-//        this.movementStrategy = new KeyMovementStrategy(this.currentNode, this, window);
-        this.speed = .10f;
-
-        this.model = OBJLoader.loadModel("/models/pacman.obj");
-        Material material = new Material(new Vector3f(1f, 1f, 0f), 1);
-
-        this.model.setMaterial(material);
-        this.setScale(0.5f);
-
-//        this.setPosition(this.currentNode.getBlock().getPosition());
-    }
-
     public Pacman(Node node, Window window) throws Exception {
         super(null);
 
@@ -55,7 +38,10 @@ public class Pacman extends Entity {
         this.movementStrategy.move();
     }
 
-
+    public void setCurrentNode(Node currentNode) {
+        this.currentNode = currentNode;
+        this.setPosition(currentNode.getBlock().getPosition());
+    }
 
     @Override
     public void movePosition(float offsetX, float offsetY, float offsetZ) {
