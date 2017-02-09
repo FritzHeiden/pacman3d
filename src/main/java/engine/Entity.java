@@ -48,7 +48,9 @@ public class Entity {
         position.z += offset.z;
     }
 
-    public void update() {}
+    public int update() {
+        return 0;
+    }
 
     public Vector3f getPosition() {
         return this.position;

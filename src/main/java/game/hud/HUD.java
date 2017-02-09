@@ -17,11 +17,12 @@ public class HUD {
     private ArrayList<Entity> elements;
     private ArrayList<Entity> numbers;
 
-    private int score;
+    private int score, live;
     private Window window;
 
     public HUD(Window window) throws Exception {
         this.score = 0;
+        this.live = 3;
         this.elements = new ArrayList<>();
         this.numbers = loadNumbers();
         this.window = window;
@@ -32,12 +33,17 @@ public class HUD {
         float width = (float)window.getWidth() / window.getHeight();
         float height = 1;
         Model scoreLabelModel = OBJLoader.loadModel("/models/squarePlain.obj");
+//        Model liveLabelModel = OBJLoader.loadModel("/models/squarePlain.obj");
         scoreLabelModel.setMaterial(new Material(new Texture("/textures/score.png"), 1));
         Entity scoreLabelEntity = new Entity(scoreLabelModel);
+//        Entity liveLabelEntity = new Entity(liveLabelModel);
         float size = 1000/148 * .02f;
         scoreLabelEntity.setScale(size);
+//        liveLabelEntity.setScale(size);
         scoreLabelEntity.setPosition(-width + .1f + size, height - .1f, 0);
+//        liveLabelEntity.setPosition(0, 0, 0);
         elements.add(scoreLabelEntity);
+//        elements.add(liveLabelEntity);
 
     }
 
@@ -83,5 +89,9 @@ public class HUD {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setLive(int live) {
+        this.live = live;
     }
 }

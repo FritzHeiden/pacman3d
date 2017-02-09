@@ -3,6 +3,11 @@ package game.movements;
 import engine.Entity;
 import engine.Window;
 import game.entities.Node;
+import org.joml.Vector3f;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -13,6 +18,7 @@ public class KeyMovementStrategy extends AbstractMovement {
 
     private Window window;
     private String directionString;
+    private Vector3f killPosition;
 
     public KeyMovementStrategy(Node node, Entity movingObject, Window window) {
         super(node, movingObject);
@@ -22,6 +28,7 @@ public class KeyMovementStrategy extends AbstractMovement {
 
     public void move() {
         this.opositeDirection();
+        super.move();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
             this.setCurrentNode(this.getNextNode());
             this.keyContinuous();
@@ -38,7 +45,7 @@ public class KeyMovementStrategy extends AbstractMovement {
                 this.setDirection(this.STOP);
             }
         }
-        super.move();
+
 
     }
 
@@ -61,7 +68,7 @@ public class KeyMovementStrategy extends AbstractMovement {
                 this.setDirection(this.RIGHT);
                 this.directionString = "RIGHT";
             }
-        } else if (this.window.isKeyPressed(GLFW_KEY_LEFT)  && this.directionLeftRight()) {
+        } else if (this.window.isKeyPressed(GLFW_KEY_LEFT) && this.directionLeftRight()) {
             if (this.getCurrentNode().hasLeftNeighbor()) {
                 this.setNextNode(this.getCurrentNode().getLeftNeighbor());
                 this.setDirection(this.LEFT);
@@ -96,6 +103,23 @@ public class KeyMovementStrategy extends AbstractMovement {
                 this.directionString = "RIGHT";
             }
         }
+    }
+
+    @Override
+    public void die() {
+        this.setDirection(this.FALL);
+        this.killPosition = new Vector3f(this.getMovingObject().getPosition());
+        this.killPosition.add(0, -5, 0);
+    }
+
+    @Override
+    public boolean backToLife() {
+        if(this.getMovingObject().getPosition().closeTo(this.killPosition)) {
+            this.setDirection(this.STOP);
+            this.getMovingObject().setPosition(this.getCurrentPosition());
+            return true;
+        }
+        return false;
     }
 
     private boolean directionUpDown() {

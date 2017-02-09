@@ -6,6 +6,7 @@ import engine.graph.Material;
 import engine.graph.OBJLoader;
 import game.movements.AbstractMovement;
 import game.movements.KeyMovementStrategy;
+import game.scenes.GameScene;
 import org.joml.Vector3f;
 
 import java.util.List;
@@ -16,14 +17,12 @@ import java.util.List;
 public class Pacman extends Entity {
 
     private float speed;
-    private AbstractMovement movementStrategy;
-    private List<Breadcrump> breadcrumpList;
-    private int col, row;
+    private KeyMovementStrategy movementStrategy;
+    private GameScene gameScene;
 
-
-    public Pacman(Node node, Window window, List<Breadcrump> breadcrumpList) throws Exception {
+    public Pacman(Node node, Window window, GameScene gameScene) throws Exception {
         super();
-        this.breadcrumpList = breadcrumpList;
+        this.gameScene = gameScene;
         this.movementStrategy = new KeyMovementStrategy(node, this, window);
         this.speed = .20f;
 
@@ -35,19 +34,21 @@ public class Pacman extends Entity {
         this.setPosition(node.getPosition());
     }
 
-    private void eatBreadcrumps() {
-        for (int i = 0; i < this.breadcrumpList.size(); i++) {
+    private int eatBreadcrumps() {
+        List<Breadcrump> breadcrumpList = this.gameScene.getLevel().getBreadcrumpList();
+        for (int i = 0; i < breadcrumpList.size(); i++) {
             if (this.getPosition().closeTo(breadcrumpList.get(i).getPosition())) {
-                System.out.println("remove breadbrump");
-                this.breadcrumpList.remove(breadcrumpList.get(i));
+                breadcrumpList.remove(breadcrumpList.get(i));
+                return 5;
             }
         }
+        return 0;
     }
 
     @Override
-    public void update() {
+    public int update() {
         this.movementStrategy.move();
-        this.eatBreadcrumps();
+        return this.eatBreadcrumps();
     }
 
     @Override
@@ -58,5 +59,14 @@ public class Pacman extends Entity {
             offset.mul(speed);
         }
         super.movePosition(offset.x, offset.y, offset.z);
+    }
+
+    public void die() {
+        this.movementStrategy.die();
+        this.gameScene.kill();
+    }
+
+    public boolean backToLife() {
+        return this.movementStrategy.backToLife();
     }
 }
