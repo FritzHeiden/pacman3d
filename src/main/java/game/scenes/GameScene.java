@@ -35,6 +35,8 @@ public class GameScene extends Scene {
     private HUD hud;
     private static final float CAMERA_POS_STEP = 0.05f;
     private Pacman pacman;
+    private Integer score;
+    private Integer lives;
 
     public GameScene() {
         renderer = new Renderer();
@@ -45,6 +47,8 @@ public class GameScene extends Scene {
         this.entities = new ArrayList<>();
         this.entities2d = new ArrayList<>();
         this.pointLights = new ArrayList<>();
+        this.lives = 3;
+        this.score = 0;
     }
 
     @Override
@@ -59,23 +63,23 @@ public class GameScene extends Scene {
         camera.setRotation(0f, 0, 0);
 
         // Make entities
-        pacman = new Pacman(this.level.getNodeList().get(0), window, this.level.getBreadcrumpList());
+        pacman = new Pacman(this.level.getNodeList().get(0), window, this);
         pacman.setRotation(0, 90, 0);
         this.entities.add(pacman);
 
-        Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(5));
+        Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(1), this.pacman);
 //        redGhost.setPosition(-3f, 0, -4);
         this.entities.add(redGhost);
 
-        Ghost pinkGhost = new Ghost(Ghost.PINK, this.level.getNodeList().get(10));
+        Ghost pinkGhost = new Ghost(Ghost.PINK, this.level.getNodeList().get(8), this.pacman);
 //        pinkGhost.setPosition(-1f, 0, -4);
         this.entities.add(pinkGhost);
 //
-        Ghost orangeGhost = new Ghost(Ghost.ORANGE, this.level.getNodeList().get(15));
+        Ghost orangeGhost = new Ghost(Ghost.ORANGE, this.level.getNodeList().get(15), this.pacman);
 //        orangeGhost.setPosition(1f, 0, -4);
         this.entities.add(orangeGhost);
 //
-        Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE, this.level.getNodeList().get(20));
+        Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE, this.level.getNodeList().get(20), this.pacman);
 //        turquoiseGhost.setPosition(3f, 0, -4);
         this.entities.add(turquoiseGhost);
 
@@ -92,7 +96,6 @@ public class GameScene extends Scene {
 
         // 2d stuff
         hud = new HUD(window);
-
         hud.setScore(51675416);
 
         glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -125,7 +128,9 @@ public class GameScene extends Scene {
 
 
         for (Entity entity: entities)
-            entity.update();
+            score += entity.update();
+        hud.setScore(this.score);
+
 
         // Update camera based on mouse            
 //        if (mouseInput.isRightButtonPressed()) {
@@ -142,6 +147,9 @@ public class GameScene extends Scene {
         camera.getPosition().add(direction);
         camera.getPosition().add(0, .5f, 0);
         pointLights.get(0).setPosition(pacman.getPosition());
+
+        if (this.lives == 0)
+            this.switchScene(new MenuScene());
     }
 
     @Override
@@ -169,5 +177,14 @@ public class GameScene extends Scene {
             entity.getModel().cleanUp();
         }
     }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void kill() {
+        this.lives --;
+    }
+
 
 }

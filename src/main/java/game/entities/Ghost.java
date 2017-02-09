@@ -16,10 +16,13 @@ public class Ghost extends Entity {
     private int color;
     private float speed;
     private AbstractMovement movementStrategy;
+    private Pacman pacman;
+    private boolean killedPacman;
 
-    public Ghost(int color, Node node) throws Exception {
+
+    public Ghost(int color, Node node, Pacman pacman) throws Exception {
         super();
-
+        this.pacman = pacman;
         this.movementStrategy = new AutoMovementStrategy(node, this);
         this.model = OBJLoader.loadModel("/models/ghost.obj");
 
@@ -52,9 +55,25 @@ public class Ghost extends Entity {
         this.getPosition().add(0, 0.1f, 0);
     }
 
+    private int killPacman() {
+        if (this.position.closeTo(pacman.getPosition())){
+            pacman.die();
+            this.killedPacman = true;
+            return 0;
+        }
+
+        if (this.killedPacman) {
+            if (pacman.backToLife()) {
+                this.killedPacman = false;
+            }
+        }
+        return 0;
+    }
+
     @Override
-    public void update() {
+    public int update() {
         this.movementStrategy.move();
+        return killPacman();
     }
 
     @Override
@@ -75,11 +94,6 @@ public class Ghost extends Entity {
         this.speed = speed;
     }
 
-//    @Override
-//    public Vector3f getPosition() {
-//        return super.getPosition();
-//    }
-
     @Override
     public void setPosition(float x, float y, float z) {
         super.setPosition(x, y, z);
@@ -94,11 +108,6 @@ public class Ghost extends Entity {
     public void setScale(float scale) {
         super.setScale(scale);
     }
-//
-//    @Override
-//    public Vector3f getRotation() {
-//        return super.getRotation();
-//    }
 
     @Override
     public void setRotation(float x, float y, float z) {

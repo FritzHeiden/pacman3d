@@ -13,11 +13,12 @@ import java.util.Map;
  */
 public abstract class AbstractMovement {
 
-    public final Vector3f UP = new Vector3f(.0000f, .0000f, -.01f);
-    public final Vector3f DOWN = new Vector3f (.0000f, .0000f, .01f);
-    public final Vector3f RIGHT = new Vector3f (.01f, .0000f, .0000f);
-    public final Vector3f LEFT = new Vector3f (-.01f, .0000f, .0000f);
-    public final Vector3f STOP = new Vector3f (.0000f, .0000f, .0000f);
+    public final Vector3f UP = new Vector3f(0, 0, -.01f);
+    public final Vector3f DOWN = new Vector3f (0, 0, .01f);
+    public final Vector3f RIGHT = new Vector3f (.01f, 0, 0);
+    public final Vector3f LEFT = new Vector3f (-.01f, 0, 0);
+    public final Vector3f STOP = new Vector3f (0, 0, 0);
+    public final Vector3f FALL = new Vector3f(0, -.1f, 0);
     private final Map<String, Vector3f> directions = new HashMap<>();
 
     private Node currentNode;
@@ -39,13 +40,7 @@ public abstract class AbstractMovement {
 
     public void move() {
         this.movingObject.movePosition(this.direction);
-//        this.colorTargetNode();
     }
-
-//    public void colorTargetNode() {
-//        this.getCurrentNode().setColor(new Vector3f(0, 0, 1));
-//        this.getNextNode().getBlock().setColor(new org.joml.Vector3f(0, 1, 0));
-//    }
 
     public Node getCurrentNode() {
         return currentNode;
@@ -81,6 +76,12 @@ public abstract class AbstractMovement {
     }
 
     public Vector3f getCurrentPosition() {
-        return this.currentNode.getBlock().getPosition();
+        return this.currentNode.getPosition();
+    }
+
+    public void die() {}
+
+    public boolean backToLife() {
+        return false;
     }
 }
