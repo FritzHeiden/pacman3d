@@ -4,7 +4,8 @@ import engine.Entity;
 import engine.MouseInput;
 import engine.Scene;
 import engine.Window;
-import engine.graph.*;
+import engine.graph.Camera;
+import engine.graph.PointLight;
 import game.Renderer;
 import game.Renderer2D;
 import game.entities.Ghost;
@@ -55,10 +56,11 @@ public class GameScene extends Scene {
         this.level = LevelLoader.load("/level/maze.txt");
 
         camera.setPosition(level.getWidth() / 2 * .2f, 4, level.getHeight() / 2 * .2f);
-        camera.setRotation(90f, 0, 0);
+        camera.setRotation(0f, 0, 0);
 
         // Make entities
         pacman = new Pacman(this.level.getNodeList().get(0), window);
+        pacman.setRotation(0, 90, 0);
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(5));
@@ -93,6 +95,7 @@ public class GameScene extends Scene {
 
         hud.setScore(51675416);
 
+        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
     @Override
@@ -118,18 +121,27 @@ public class GameScene extends Scene {
     @Override
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
-        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
-        camera.moveRotation(0, 0, 0);
-        pointLights.get(0).setPosition(camera.getPosition());
+//        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+
 
         for (Entity entity: entities)
             entity.update();
 
         // Update camera based on mouse            
-        if (mouseInput.isRightButtonPressed()) {
+//        if (mouseInput.isRightButtonPressed()) {
             Vector2f rotVec = mouseInput.getDisplVec();
             camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
-        }
+        System.out.println(camera.getRotation().y);
+//        }
+
+        Vector3f direction = new Vector3f(
+                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
+                0,
+                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
+        camera.setPosition(pacman.getPosition());
+        camera.getPosition().add(direction);
+        camera.getPosition().add(0, .5f, 0);
+        pointLights.get(0).setPosition(pacman.getPosition());
     }
 
     @Override

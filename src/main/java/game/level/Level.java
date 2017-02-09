@@ -1,11 +1,12 @@
 package game.level;
 
-import com.sun.istack.internal.NotNull;
 import game.entities.Breadcrump;
 import game.entities.Node;
 import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 /**
@@ -79,7 +80,7 @@ public class Level {
                         this.nodeList.add(new Node(block));
                         Breadcrump breadcrump = new Breadcrump();
                         breadcrump.setScale(scale/10f);
-                        breadcrump.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump);
                         break;
                     case Level.CONNECTOR_COL:
@@ -87,7 +88,7 @@ public class Level {
                         block.setColor(new Vector3f(.9f, 0, 0));
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
-                        breadcrump0.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump0.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump0);
                         break;
                     case Level.CONNECTOR_ROW:
@@ -95,7 +96,7 @@ public class Level {
                         block.setColor(new Vector3f(.8f, .3f, .3f));
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
-                        breadcrump1.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump1.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump1);
                         break;
 
