@@ -29,15 +29,9 @@ public class Entity {
     }
 
     public void movePosition(Vector3f offset) {
-        if ( offset.z != 0 ) {
-            position.x += (float)Math.sin(Math.toRadians(rotation.y)) * -1.0f * offset.z;
-            position.z += (float)Math.cos(Math.toRadians(rotation.y)) * offset.z;
-        }
-        if ( offset.x != 0) {
-            position.x += (float)Math.sin(Math.toRadians(rotation.y - 90)) * -1.0f * offset.x;
-            position.z += (float)Math.cos(Math.toRadians(rotation.y - 90)) * offset.x;
-        }
+        position.x += offset.x;
         position.y += offset.y;
+        position.z += offset.z;
     }
 
     public Vector3f getPosition() {

@@ -62,17 +62,17 @@ public class Level {
                         break;
                     case Level.NODE:
                         block.setPosition(col * scale, levelHeight, row * scale);
-                        block.setColor(new Vector3f(0, 1, 0));
+                        block.setColor(new Vector3f(1, 0, 0));
                         this.nodeList.add(new Node(block));
 //                        this.breadcrumpList.add(new Breadcrump(block));
                         break;
                     case Level.CONNECTOR_COL:
                         block.setPosition(col * scale, levelHeight, row * scale);
-                        block.setColor(new Vector3f(1, 1, 0));
+                        block.setColor(new Vector3f(.9f, 0, 0));
                         break;
                     case Level.CONNECTOR_ROW:
                         block.setPosition(col * scale, levelHeight, row * scale);
-                        block.setColor(new Vector3f(0, 1, 1));
+                        block.setColor(new Vector3f(.8f, .3f, .3f));
                         break;
 
                 }
@@ -110,7 +110,6 @@ public class Level {
 
                 if (IntStream.of(trail).anyMatch(x -> x == val)) {
                     while (val0 == Level.CONNECTOR_COL || val == Level.CONNECTOR_ROW) {
-                        System.out.println(val0);
                         rowOffset += valRow;
                         colOffset += valCol;
                         try {
@@ -123,7 +122,6 @@ public class Level {
                     }
                     node.setNeighbors(new Node(this.getBlock(row+rowOffset, col+colOffset)),
                             direction.getKey());
-                    System.out.println(direction.getKey());
                 }
 
             }
