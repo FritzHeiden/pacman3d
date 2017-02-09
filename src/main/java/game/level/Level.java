@@ -1,11 +1,12 @@
 package game.level;
 
-import com.sun.istack.internal.NotNull;
 import game.entities.Breadcrump;
 import game.entities.Node;
 import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 /**
@@ -67,7 +68,7 @@ public class Level {
             for (int y = 0; y < this.height; y ++) {
                 Block block = new Block(x, y);
                 block.setScale(scale/2f);
-                block.setPosition(x * scale, levelHeight-2f, y * scale);
+                block.setPosition(x * scale, levelHeight, y * scale);
                 switch (this.level[x][y]) {
                     case Level.VOID:
                         block = null;
@@ -78,19 +79,19 @@ public class Level {
                         this.nodeList.add(node);
                         Breadcrump breadcrump = new Breadcrump();
                         breadcrump.setScale(scale/10f);
-                        breadcrump.setPosition(x * scale, levelHeight, y*scale);
+                        breadcrump.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump);
                         break;
                     case Level.CONNECTOR_COL:
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
-                        breadcrump0.setPosition(x * scale, levelHeight, y*scale);
+                        breadcrump0.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump0);
                         break;
                     case Level.CONNECTOR_ROW:
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
-                        breadcrump1.setPosition(x * scale, levelHeight, y*scale);
+                        breadcrump1.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump1);
                         break;
 

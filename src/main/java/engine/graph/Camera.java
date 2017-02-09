@@ -22,6 +22,12 @@ public class Camera {
         return position;
     }
 
+    public void setPosition(Vector3f v) {
+        position.x = v.x;
+        position.y = v.y;
+        position.z = v.z;
+    }
+
     public void setPosition(float x, float y, float z) {
         position.x = x;
         position.y = y;
