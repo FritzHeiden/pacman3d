@@ -106,6 +106,9 @@ public class Model {
     }
 
     public void render() {
+        glEnable (GL_BLEND);
+        glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         Texture texture = material.getTexture();
         if (texture != null) {
             // Activate firs texture bank

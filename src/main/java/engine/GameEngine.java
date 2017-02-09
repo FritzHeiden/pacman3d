@@ -12,7 +12,7 @@ public class GameEngine implements Runnable {
 
     private final Timer timer;
 
-    private final Scene scene;
+    private Scene scene;
 
     private final MouseInput mouseInput;
 
@@ -73,6 +73,17 @@ public class GameEngine implements Runnable {
 
             if ( !window.isvSync() ) {
                 sync();
+            }
+
+            if (scene.getRequestedScene() != null) {
+                Scene newScene = scene.getRequestedScene();
+                scene.cleanup();
+                scene = newScene;
+                try {
+                    scene.init(window);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

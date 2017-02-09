@@ -1,14 +1,24 @@
 package engine;
 
-public interface Scene {
+public abstract class Scene {
 
-    void init(Window window) throws Exception;
-    
-    void input(Window window, MouseInput mouseInput);
+    private Scene requestedScene;
 
-    void update(float interval, MouseInput mouseInput);
-    
-    void render(Window window);
-    
-    void cleanup();
+    public abstract void init(Window window) throws Exception;
+
+    public abstract void input(Window window, MouseInput mouseInput);
+
+    public abstract void update(float interval, MouseInput mouseInput);
+
+    public abstract void render(Window window);
+
+    public abstract void cleanup();
+
+    public void switchScene(Scene newScene) {
+        requestedScene = newScene;
+    }
+
+    public Scene getRequestedScene() {
+        return requestedScene;
+    }
 }

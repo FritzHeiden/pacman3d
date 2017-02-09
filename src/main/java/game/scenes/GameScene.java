@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class GameScene implements Scene {
+public class GameScene extends Scene {
 
     private static final float MOUSE_SENSITIVITY = 0.2f;
     private final Vector3f cameraInc;
