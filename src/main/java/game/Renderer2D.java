@@ -27,9 +27,12 @@ public class Renderer2D {
 
     private float specularPower;
 
+    private Camera camera;
+
     public Renderer2D() {
         transformation = new Transformation2D();
         specularPower = 10f;
+        camera = new Camera();
     }
 
     public void init(Window window) throws Exception {
@@ -51,9 +54,10 @@ public class Renderer2D {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public void render(Window window, Camera camera, ArrayList<Entity> entities) {
-
-        clear();
+    public void render(Window window, ArrayList<Entity> entities) {
+//        clear();
+        Camera camera = new Camera();
+        camera.setPosition(0, 0, 1);
 
         if ( window.isResized() ) {
             glViewport(0, 0, window.getWidth(), window.getHeight());
@@ -75,10 +79,10 @@ public class Renderer2D {
         // Render each entity
         for (Entity entity : entities) {
             Model model = entity.getModel();
-            // Set model view matrix for this item
+
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(entity, viewMatrix);
             shaderProgram.setUniform("modelViewMatrix", modelViewMatrix);
-            // Render the model for this game item
+
             shaderProgram.setUniform("material", model.getMaterial());
             model.render();
         }

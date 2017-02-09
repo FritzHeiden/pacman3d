@@ -4,9 +4,9 @@ import engine.Entity;
 import engine.MouseInput;
 import engine.Scene;
 import engine.Window;
-import engine.graph.Camera;
-import engine.graph.PointLight;
+import engine.graph.*;
 import game.Renderer;
+import game.Renderer2D;
 import game.entities.Ghost;
 import game.entities.Pacman;
 import game.level.Level;
@@ -23,8 +23,10 @@ public class GameScene extends Scene {
     private static final float MOUSE_SENSITIVITY = 0.2f;
     private final Vector3f cameraInc;
     private final Renderer renderer;
+    private final Renderer2D renderer2D;
     private final Camera camera;
     private ArrayList<Entity> entities;
+    private ArrayList<Entity> entities2d;
     private Vector3f ambientLight;
     private ArrayList<PointLight> pointLights;
     private Level level;
@@ -33,16 +35,19 @@ public class GameScene extends Scene {
 
     public GameScene() {
         renderer = new Renderer();
+        renderer2D = new Renderer2D();
         camera = new Camera();
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
 
         this.entities = new ArrayList<>();
+        this.entities2d = new ArrayList<>();
         this.pointLights = new ArrayList<>();
     }
 
     @Override
     public void init(Window window) throws Exception {
         renderer.init(window);
+        renderer2D.init(window);
 
         // Load Level
         this.level = LevelLoader.load("/level/maze.txt");
@@ -80,6 +85,16 @@ public class GameScene extends Scene {
         PointLight.Attenuation att = new PointLight.Attenuation(0.0f, 0.0f, 1f);
         pointLight.setAttenuation(att);
         this.pointLights.add(pointLight);
+
+
+        // 2d stuff
+//        Model testHud = OBJLoader.loadModel("/models/squarePlain.obj");
+//        testHud.setMaterial(new Material(new Vector3f(1, 0, 0), 1));
+//        Entity hudEntity = new Entity(testHud);
+//        hudEntity.setScale(100);
+//        hudEntity.setPosition(0, 0, -1);
+//        hudEntity.setRotation(30f, 0, 0);
+//        this.entities2d.add(hudEntity);
     }
 
     @Override
@@ -106,6 +121,7 @@ public class GameScene extends Scene {
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        camera.moveRotation(0, 0, 0);
         pointLights.get(0).setPosition(camera.getPosition());
         pacman.update();
 
@@ -129,6 +145,7 @@ public class GameScene extends Scene {
         allEntities.addAll(this.level.getBlockList());
 //        allEntities.addAll(this.level.getNodeList());
         renderer.render(window, camera, allEntities, ambientLight, pointLights);
+        renderer2D.render(window, entities2d);
     }
 
     @Override

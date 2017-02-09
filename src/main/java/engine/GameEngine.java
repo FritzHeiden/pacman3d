@@ -1,5 +1,9 @@
 package engine;
 
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
+
 public class GameEngine implements Runnable {
 
     public static final int TARGET_FPS = 75;
@@ -59,6 +63,7 @@ public class GameEngine implements Runnable {
 
         boolean running = true;
         while (running && !window.windowShouldClose()) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             elapsedTime = timer.getElapsedTime();
             accumulator += elapsedTime;
 

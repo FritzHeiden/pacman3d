@@ -3,7 +3,6 @@ package game.movements;
 import engine.Entity;
 import engine.Window;
 import game.entities.Node;
-import game.level.Level;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
@@ -22,7 +21,7 @@ public class KeyMovementStrategy extends AbstractMovement {
     @Override
     public void move() {
         this.keyContinuous(this.window);
-        System.out.println(this.getMovingObject().getPosition() + " " + this.getTargetPosition() + this.getMovingObject().getPosition().distance(this.getTargetPosition()));
+//        System.out.println(this.getMovingObject().getPosition() + " " + this.getTargetPosition() + this.getMovingObject().getPosition().distance(this.getTargetPosition()));
 
         if (this.getMovingObject().getPosition().equals(this.getTargetPosition())) {
             this.setCurrentNode(this.getTarget());

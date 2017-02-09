@@ -62,6 +62,10 @@ public class Entity {
         return rotation;
     }
 
+    public void setRotation(Vector3f rotation) {
+        setRotation(rotation.x, rotation.y, rotation.z);
+    }
+
     public void setRotation(float x, float y, float z) {
         this.rotation.x = x;
         this.rotation.y = y;
@@ -72,4 +76,9 @@ public class Entity {
         return model;
     }
 
+    public void moveRotation(float offsetX, float offsetY, float offsetZ) {
+        rotation.x += offsetX;
+        rotation.y += offsetY;
+        rotation.z += offsetZ;
+    }
 }

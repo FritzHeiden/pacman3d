@@ -19,7 +19,6 @@ import static org.lwjgl.glfw.GLFW.*;
 public class MenuScene extends Scene {
     private Renderer2D renderer;
     private final Vector3f cameraInc;
-    private final Camera camera;
 
     private ArrayList<Entity> entities;
 
@@ -27,7 +26,6 @@ public class MenuScene extends Scene {
 
     public MenuScene() {
         renderer = new Renderer2D();
-        camera = new Camera();
         cameraInc = new Vector3f(0.0f, 0.0f, 0.0f);
 
         entities = new ArrayList<>();
@@ -35,10 +33,6 @@ public class MenuScene extends Scene {
 
     public void init(Window window) throws Exception {
         renderer.init(window);
-
-        camera.setPosition(0, 0, 5);
-
-
 
         Model logoModel = OBJLoader.loadModel("/models/squarePlain.obj");
         logoModel.setMaterial(new Material(new Texture("/textures/logo.png"), 1));
@@ -96,11 +90,10 @@ public class MenuScene extends Scene {
     }
 
     public void update(float interval, MouseInput mouseInput) {
-        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
     }
 
     public void render(Window window) {
-        renderer.render(window, camera, entities);
+        renderer.render(window, entities);
     }
 
     public void cleanup() {

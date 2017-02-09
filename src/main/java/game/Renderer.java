@@ -60,9 +60,7 @@ public class Renderer {
     public void render(Window window, Camera camera, ArrayList<Entity> entities, Vector3f ambientLight,
                        ArrayList<PointLight> pointLights) {
 
-        clear();
-
-        glClearColor(1, 0, 0, 1);
+//        clear();
 
         if ( window.isResized() ) {
             glViewport(0, 0, window.getWidth(), window.getHeight());
