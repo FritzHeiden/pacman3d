@@ -29,7 +29,7 @@ public abstract class AbstractMovement {
         this.currentNode = node;
         this.nextNode = node;
         this.movingObject = movingObject;
-        this.direction = this.RIGHT;
+        this.direction = this.STOP;
 
         directions.put("UP", this.UP);
         directions.put("DOWN", this.DOWN);
@@ -39,13 +39,13 @@ public abstract class AbstractMovement {
 
     public void move() {
         this.movingObject.movePosition(this.direction);
-        this.colorTargetNode();
+//        this.colorTargetNode();
     }
 
-    public void colorTargetNode() {
-        this.getCurrentNode().getBlock().setColor(new Vector3f(0, 0, 1));
-        this.getNextNode().getBlock().setColor(new org.joml.Vector3f(0, 1, 0));
-    }
+//    public void colorTargetNode() {
+//        this.getCurrentNode().setColor(new Vector3f(0, 0, 1));
+//        this.getNextNode().getBlock().setColor(new org.joml.Vector3f(0, 1, 0));
+//    }
 
     public Node getCurrentNode() {
         return currentNode;
@@ -72,7 +72,7 @@ public abstract class AbstractMovement {
     }
 
     public Vector3f getNextNodePosition() {
-        return nextNode.getBlock().getPosition();
+        return nextNode.getPosition();
 
     }
 

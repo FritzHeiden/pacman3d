@@ -12,13 +12,16 @@ import static org.lwjgl.glfw.GLFW.*;
 public class KeyMovementStrategy extends AbstractMovement {
 
     private Window window;
+    private String directionString;
 
     public KeyMovementStrategy(Node node, Entity movingObject, Window window) {
         super(node, movingObject);
+        this.directionString = "";
         this.window = window;
     }
 
     public void move() {
+        this.opositeDirection();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
             this.setCurrentNode(this.getNextNode());
             this.keyContinuous();
@@ -44,31 +47,63 @@ public class KeyMovementStrategy extends AbstractMovement {
             if (this.getCurrentNode().hasUpperNeighbor() && this.directionUpDown()) {
                 this.setNextNode(this.getCurrentNode().getUpperNeighbor());
                 this.setDirection(this.UP);
+                this.directionString = "UP";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_DOWN)) {
             if (this.getCurrentNode().hasLowerNeighbor() && this.directionUpDown()) {
                 this.setNextNode(this.getCurrentNode().getLowerNeighbor());
                 this.setDirection(this.DOWN);
+                this.directionString = "DOWN";
             }
-        } else if (this.window.isKeyPressed(GLFW_KEY_RIGHT)) {
-            if (this.getCurrentNode().hasRightNeigbor() && this.directionLeftRight()) {
+        } else if (this.window.isKeyPressed(GLFW_KEY_RIGHT) && this.directionLeftRight()) {
+            if (this.getCurrentNode().hasRightNeigbor()) {
                 this.setNextNode(this.getCurrentNode().getRightNeighbor());
                 this.setDirection(this.RIGHT);
+                this.directionString = "RIGHT";
             }
-        } else if (this.window.isKeyPressed(GLFW_KEY_LEFT)) {
-            if (this.getCurrentNode().hasLeftNeighbor() && this.directionLeftRight()) {
+        } else if (this.window.isKeyPressed(GLFW_KEY_LEFT)  && this.directionLeftRight()) {
+            if (this.getCurrentNode().hasLeftNeighbor()) {
                 this.setNextNode(this.getCurrentNode().getLeftNeighbor());
                 this.setDirection(this.LEFT);
+                this.directionString = "LEFT";
             }
         }
     }
 
-    public boolean directionUpDown() {
+    private void opositeDirection() {
+        if (this.window.isKeyPressed(GLFW_KEY_UP)) {
+            if (this.directionString.equals("DOWN")) {
+                this.setNextNode(this.getCurrentNode());
+                this.setDirection(this.UP);
+                this.directionString = "UP";
+            }
+        } else if (this.window.isKeyPressed(GLFW_KEY_DOWN)) {
+            if (this.directionString.equals("UP")) {
+                this.setNextNode(this.getCurrentNode());
+                this.setDirection(this.DOWN);
+                this.directionString = "DOWN";
+            }
+        } else if (this.window.isKeyPressed(GLFW_KEY_LEFT)) {
+            if (this.directionString.equals("RIGHT")) {
+                this.setNextNode(this.getCurrentNode());
+                this.setDirection(this.LEFT);
+                this.directionString = "LEFT";
+            }
+        } else if (this.window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            if (this.directionString.equals("LEFT")) {
+                this.setNextNode(this.getCurrentNode());
+                this.setDirection(this.RIGHT);
+                this.directionString = "RIGHT";
+            }
+        }
+    }
+
+    private boolean directionUpDown() {
         return this.getDirection().closeTo(this.UP) || this.getDirection().closeTo(this.DOWN) ||
                 this.getMovingObject().getPosition().closeTo(this.getNextNodePosition());
     }
 
-    public boolean directionLeftRight() {
+    private boolean directionLeftRight() {
         return this.getDirection().closeTo(this.LEFT) || this.getDirection().closeTo(this.RIGHT) ||
                 this.getMovingObject().getPosition().closeTo(this.getNextNodePosition());
     }

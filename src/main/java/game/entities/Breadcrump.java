@@ -14,7 +14,6 @@ public class Breadcrump extends Entity {
 
         this.model = OBJLoader.loadModel("/models/sphere.obj");
         Material material = new Material(new org.joml.Vector3f(1, 1, 1), 1);
-
         this.model.setMaterial(material);
         this.setScale(0.5f);
         this.setPosition(0, 1, -2);
