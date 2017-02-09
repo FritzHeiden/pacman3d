@@ -9,8 +9,15 @@ import org.joml.Vector3f;
  * Created by fritz on 2/8/17.
  */
 public class Block extends Entity {
-    public Block() throws Exception {
+
+    private int col;
+    private int row;
+
+    public Block(int col, int row) throws Exception {
         super(null);
+
+        this.col = col;
+        this.row = row;
 
         this.model = OBJLoader.loadModel("/models/cube.obj");
         Material material = new Material(new Vector3f(.2f, .2f, .2f), 1);
@@ -18,6 +25,23 @@ public class Block extends Entity {
         this.model.setMaterial(material);
         this.setScale(0.5f);
         this.setPosition(0, 0, -2);
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public Block clone() {
+        try {
+            return (Block) super.clone();
+        } catch (final CloneNotSupportedException ex) {
+            throw new AssertionError();
+        }
     }
 
     public void setColor(Vector3f color) {
