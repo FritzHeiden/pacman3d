@@ -9,7 +9,7 @@ public class GameOverScene extends MenuScene {
 
     @Override
     public void init(Window window) throws Exception {
-        this.setLogoModel("/models/Game_Over.png");
+        this.setLogoFileName("/textures/Game_Over.png");
         super.init(window);
     }
 }
