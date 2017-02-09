@@ -47,7 +47,7 @@ public class Ghost extends Entity {
         Material material = new Material(materialColor, 1);
 
         this.model.setMaterial(material);
-        this.setScale(0.5f);
+        this.setScale(0.2f);
         this.setPosition(node.getPosition());
     }
 

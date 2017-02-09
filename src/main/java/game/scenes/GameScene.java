@@ -144,6 +144,7 @@ public class GameScene extends Scene {
         ArrayList<Entity> allEntities = new ArrayList<>();
         allEntities.addAll(this.entities);
         allEntities.addAll(this.level.getBlockList());
+        allEntities.addAll(this.level.getBreadcrumpList());
 //        allEntities.addAll(this.level.getNodeList());
         renderer.render(window, camera, allEntities, ambientLight, pointLights);
         renderer2D.render(window, entities2d);

@@ -35,14 +35,6 @@ public class Block extends Entity {
         return row;
     }
 
-    @Override
-    public Block clone() {
-        try {
-            return (Block) super.clone();
-        } catch (final CloneNotSupportedException ex) {
-            throw new AssertionError();
-        }
-    }
 
     public void setColor(Vector3f color) {
         this.model.setMaterial(new Material(color, 1));

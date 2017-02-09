@@ -1,17 +1,26 @@
 package game.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import engine.Entity;
+import engine.graph.Material;
+import engine.graph.Model;
+import engine.graph.OBJLoader;
 import game.level.Block;
+import org.joml.*;
 
 /**
  * Created by kilian on 08.02.17.
  */
 public class Breadcrump extends Entity {
 
-    private Block block;
+    public Breadcrump() throws Exception {
+        super(null);
 
-    public Breadcrump(Block block) throws Exception {
-        super(block.getModel());
-        this.block = block;
+        this.model = OBJLoader.loadModel("/models/cube.obj");
+        Material material = new Material(new org.joml.Vector3f(.2f, .2f, .2f), 1);
+
+        this.model.setMaterial(material);
+        this.setScale(0.5f);
+        this.setPosition(0, 0, -2);
     }
 }

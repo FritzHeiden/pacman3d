@@ -67,6 +67,7 @@ public class Level {
             for (int y = 0; y < this.height; y ++) {
                 Block block = new Block(x, y);
                 block.setScale(scale/2f);
+
                 switch (this.level[x][y]) {
                     case Level.VOID:
 //                        block.setPosition(col * scale, levelHeight - scale, row * scale);
@@ -76,15 +77,26 @@ public class Level {
                         block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(1, 0, 0));
                         this.nodeList.add(new Node(block));
-//                        this.breadcrumpList.add(new Breadcrump(block));
+                        Breadcrump breadcrump = new Breadcrump();
+                        breadcrump.setScale(scale/10f);
+                        breadcrump.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        this.breadcrumpList.add(breadcrump);
                         break;
                     case Level.CONNECTOR_COL:
                         block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(.9f, 0, 0));
+                        Breadcrump breadcrump0 = new Breadcrump();
+                        breadcrump0.setScale(scale/10f);
+                        breadcrump0.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        this.breadcrumpList.add(breadcrump0);
                         break;
                     case Level.CONNECTOR_ROW:
                         block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(.8f, .3f, .3f));
+                        Breadcrump breadcrump1 = new Breadcrump();
+                        breadcrump1.setScale(scale/10f);
+                        breadcrump1.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        this.breadcrumpList.add(breadcrump1);
                         break;
 
                 }
