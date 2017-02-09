@@ -92,7 +92,7 @@ public class Renderer {
         }
 
         shaderProgram.setUniform("texture_sampler", 0);
-        // Render each gameItem
+        // Render each entity
         for (Entity entity : entities) {
             Model model = entity.getModel();
             // Set model view matrix for this item

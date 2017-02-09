@@ -137,7 +137,7 @@ public class GameScene implements Scene {
         for (Entity entity : entities) {
             entity.getModel().cleanUp();
         }
-        for (Entity entity : level.getBlocks()) {
+        for (Entity entity : level.getBlockList()) {
             entity.getModel().cleanUp();
         }
     }
