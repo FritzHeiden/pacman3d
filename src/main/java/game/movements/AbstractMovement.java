@@ -2,9 +2,9 @@ package game.movements;
 
 import engine.Entity;
 import game.entities.Node;
-import org.joml.Vector3f;
+import game.entities.Vector3f;
 
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,23 +13,23 @@ import java.util.Map;
  */
 public abstract class AbstractMovement {
 
-    public final Vector3f UP = new Vector3f(0, -.01f, 0);
-    public final Vector3f DOWN = new Vector3f (0, 0, .01f);
-    public final Vector3f RIGHT = new Vector3f (0, 0, 0);
-    public final Vector3f LEFT = new Vector3f (.01f, 0, 0);
-    public final Vector3f STOP = new Vector3f (0, 0, 0);
+    public final Vector3f UP = new Vector3f(.0000f, .0000f, -.01f);
+    public final Vector3f DOWN = new Vector3f (.0000f, .0000f, .01f);
+    public final Vector3f RIGHT = new Vector3f (.01f, .0000f, .0000f);
+    public final Vector3f LEFT = new Vector3f (-.01f, .0000f, .0000f);
+    public final Vector3f STOP = new Vector3f (.0000f, .0000f, .0000f);
     private final Map<String, Vector3f> directions = new HashMap<>();
 
     private Node currentNode;
     private Entity movingObject;
-    private Node target;
+    private Node nextNode;
     private Vector3f direction;
 
     public AbstractMovement(Node node, Entity movingObject) {
         this.currentNode = node;
-        this.target = node;
+        this.nextNode = node;
         this.movingObject = movingObject;
-        this.direction = this.DOWN;
+        this.direction = this.RIGHT;
 
         directions.put("UP", this.UP);
         directions.put("DOWN", this.DOWN);
@@ -39,6 +39,12 @@ public abstract class AbstractMovement {
 
     public void move() {
         this.movingObject.movePosition(this.direction);
+        this.colorTargetNode();
+    }
+
+    public void colorTargetNode() {
+        this.getCurrentNode().getBlock().setColor(new Vector3f(0, 0, 1));
+        this.getNextNode().getBlock().setColor(new org.joml.Vector3f(0, 1, 0));
     }
 
     public Node getCurrentNode() {
@@ -49,24 +55,24 @@ public abstract class AbstractMovement {
         return movingObject;
     }
 
-    public Node getTarget() {
-        return target;
+    public Node getNextNode() {
+        return nextNode;
     }
 
     protected void setDirection(Vector3f direction) {
         this.direction = direction;
     }
 
-    protected void setTarget(Node target) {
-        this.target = target;
+    protected void setNextNode(Node nextNode) {
+        this.nextNode = nextNode;
     }
 
     protected void setCurrentNode(Node currentNode) {
         this.currentNode = currentNode;
     }
 
-    public Vector3f getTargetPosition() {
-        return target.getBlock().getPosition();
+    public Vector3f getNextNodePosition() {
+        return nextNode.getBlock().getPosition();
 
     }
 

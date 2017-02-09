@@ -56,7 +56,7 @@ public class GameScene extends Scene {
         camera.setRotation(90f, 0, 0);
 
         // Make entities
-        pacman = new Pacman(this.level.getNodeList().get(2), window);
+        pacman = new Pacman(this.level.getNodeList().get(0), window);
 //        pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
         this.entities.add(pacman);
 

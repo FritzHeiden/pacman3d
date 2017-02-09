@@ -65,10 +65,10 @@ public class Ghost extends Entity {
         this.speed = speed;
     }
 
-    @Override
-    public Vector3f getPosition() {
-        return super.getPosition();
-    }
+//    @Override
+//    public Vector3f getPosition() {
+//        return super.getPosition();
+//    }
 
     @Override
     public void setPosition(float x, float y, float z) {
@@ -84,11 +84,11 @@ public class Ghost extends Entity {
     public void setScale(float scale) {
         super.setScale(scale);
     }
-
-    @Override
-    public Vector3f getRotation() {
-        return super.getRotation();
-    }
+//
+//    @Override
+//    public Vector3f getRotation() {
+//        return super.getRotation();
+//    }
 
     @Override
     public void setRotation(float x, float y, float z) {

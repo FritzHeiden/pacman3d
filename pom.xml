@@ -10,7 +10,7 @@
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.nextNode>1.8</maven.compiler.nextNode>
         <lwjgl.version>3.1.1</lwjgl.version>
         <joml.version>1.9.2</joml.version>
         <pngdecoder.version>1.0</pngdecoder.version>
