@@ -24,6 +24,13 @@ public class Model {
 
     private Material material;
 
+    public Model(Model model) {
+        this.vaoId = model.vaoId;
+        this.vboIdList = new ArrayList<>(model.vboIdList);
+        this.vertexCount = model.vertexCount;
+        this.material = new Material(model.material);
+    }
+
     public Model(float[] positions, float[] textCoords, float[] normals, int[] indices) {
         FloatBuffer posBuffer = null;
         FloatBuffer textCoordsBuffer = null;

@@ -11,7 +11,13 @@ public class Material {
     private float reflectance;
 
     private Texture texture;
-    
+
+    public Material(Material material) {
+        this.colour = new Vector3f(material.colour);
+        this.reflectance = material.reflectance;
+        this.texture = new Texture(material.texture);
+    }
+
     public Material() {
         colour = DEFAULT_COLOUR;
         reflectance = 0;

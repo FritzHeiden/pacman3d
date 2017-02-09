@@ -53,15 +53,8 @@ public class Renderer {
         shaderProgram.createPointLightUniform("pointLight");
     }
 
-    public void clear() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
     public void render(Window window, Camera camera, ArrayList<Entity> entities, Vector3f ambientLight,
                        ArrayList<PointLight> pointLights) {
-
-//        clear();
-
         if ( window.isResized() ) {
             glViewport(0, 0, window.getWidth(), window.getHeight());
             window.setResized(false);

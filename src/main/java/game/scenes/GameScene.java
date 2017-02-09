@@ -9,6 +9,7 @@ import game.Renderer;
 import game.Renderer2D;
 import game.entities.Ghost;
 import game.entities.Pacman;
+import game.hud.HUD;
 import game.level.Level;
 import game.level.LevelLoader;
 import org.joml.Vector2f;
@@ -30,6 +31,7 @@ public class GameScene extends Scene {
     private Vector3f ambientLight;
     private ArrayList<PointLight> pointLights;
     private Level level;
+    private HUD hud;
     private static final float CAMERA_POS_STEP = 0.05f;
     private Pacman pacman;
 
@@ -57,7 +59,6 @@ public class GameScene extends Scene {
 
         // Make entities
         pacman = new Pacman(this.level.getNodeList().get(0), window);
-//        pacman.setPosition(level.getWidth() / 2 * .2f, 0, level.getHeight() / 2 * .2f);
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED);
@@ -88,13 +89,10 @@ public class GameScene extends Scene {
 
 
         // 2d stuff
-//        Model testHud = OBJLoader.loadModel("/models/squarePlain.obj");
-//        testHud.setMaterial(new Material(new Vector3f(1, 0, 0), 1));
-//        Entity hudEntity = new Entity(testHud);
-//        hudEntity.setScale(100);
-//        hudEntity.setPosition(0, 0, -1);
-//        hudEntity.setRotation(30f, 0, 0);
-//        this.entities2d.add(hudEntity);
+        hud = new HUD(window);
+
+        hud.setScore(51675416);
+
     }
 
     @Override
@@ -125,12 +123,6 @@ public class GameScene extends Scene {
         pointLights.get(0).setPosition(camera.getPosition());
         pacman.update();
 
-//        for (Entity entity : entities) {
-//            if (entity instanceof Pacman) {
-//                entity.movePosition(cameraInc.x, cameraInc.y, cameraInc.z);
-//            }
-//        }
-
         // Update camera based on mouse            
         if (mouseInput.isRightButtonPressed()) {
             Vector2f rotVec = mouseInput.getDisplVec();
@@ -145,7 +137,11 @@ public class GameScene extends Scene {
         allEntities.addAll(this.level.getBlockList());
 //        allEntities.addAll(this.level.getNodeList());
         renderer.render(window, camera, allEntities, ambientLight, pointLights);
-        renderer2D.render(window, entities2d);
+
+        ArrayList<Entity> allEntities2d = new ArrayList<>();
+        allEntities2d.addAll(entities2d);
+        allEntities2d.addAll(hud.getElements(window));
+        renderer2D.render(window, allEntities2d);
     }
 
     @Override

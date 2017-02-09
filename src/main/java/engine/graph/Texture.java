@@ -10,6 +10,10 @@ public class Texture {
 
     private final int id;
 
+    public Texture(Texture texture) {
+        this.id = texture.id;
+    }
+
     public Texture(String fileName) throws Exception {
         this(loadTexture(fileName));
     }
