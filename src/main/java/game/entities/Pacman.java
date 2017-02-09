@@ -18,7 +18,7 @@ public class Pacman extends Entity {
 
 
     public Pacman(Node node, Window window) throws Exception {
-        super(null);
+        super();
         this.movementStrategy = new KeyMovementStrategy(node, this, window);
         this.speed = .10f;
 

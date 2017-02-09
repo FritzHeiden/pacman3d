@@ -14,7 +14,7 @@ public class Block extends Entity {
     private int row;
 
     public Block(int col, int row) throws Exception {
-        super(null);
+        super();
 
         this.col = col;
         this.row = row;

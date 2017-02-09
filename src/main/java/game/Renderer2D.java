@@ -50,12 +50,7 @@ public class Renderer2D {
         shaderProgram.createMaterialUniform("material");
     }
 
-    public void clear() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
     public void render(Window window, ArrayList<Entity> entities) {
-//        clear();
         Camera camera = new Camera();
         camera.setPosition(0, 0, 1);
 
@@ -67,8 +62,10 @@ public class Renderer2D {
         shaderProgram.bind();
 
         // Update projection Matrix
-        Matrix4f projectionMatrix = transformation.getOrthoMatrix(-window.getWidth()/2, window.getWidth()/2,
-                -window.getHeight()/2, window.getHeight()/2, Z_NEAR, Z_FAR);
+        Matrix4f projectionMatrix = transformation.getOrthoMatrix(-(float)window.getWidth()/window.getHeight(),
+                (float)window.getWidth()/window.getHeight(), -1, 1, Z_NEAR, Z_FAR);
+//        Matrix4f projectionMatrix = transformation.getOrthoMatrix(-window.getWidth()/2, window.getWidth()/2,
+//                -window.getHeight()/2, window.getHeight()/2, Z_NEAR, Z_FAR);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
 
         // Update view Matrix

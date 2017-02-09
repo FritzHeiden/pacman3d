@@ -18,7 +18,7 @@ public class Ghost extends Entity {
     private AbstractMovement movementStrategy;
 
     public Ghost(int color, Node node) throws Exception {
-        super(null);
+        super();
 
         this.movementStrategy = new AutoMovementStrategy(node, this);
         this.model = OBJLoader.loadModel("/models/ghost.obj");

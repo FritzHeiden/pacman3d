@@ -37,22 +37,22 @@ public class MenuScene extends Scene {
         Model logoModel = OBJLoader.loadModel("/models/squarePlain.obj");
         logoModel.setMaterial(new Material(new Texture("/textures/logo.png"), 1));
         Entity logoEntity = new Entity(logoModel);
-        logoEntity.setScale(360);
-        logoEntity.setPosition(0, 100, 0);
+        logoEntity.setScale(1.20f);
+        logoEntity.setPosition(0, .2f, 0);
         entities.add(logoEntity);
 
         Model startModel = OBJLoader.loadModel("/models/squarePlain.obj");
         startModel.setMaterial(new Material(new Texture("/textures/start.png"), 1));
         Entity startEntity = new Entity(startModel);
-        startEntity.setScale(100);
-        startEntity.setPosition(0, -50, 0);
+        startEntity.setScale(.30f);
+        startEntity.setPosition(0, -.3f, 0);
         entities.add(startEntity);
 
         Model quitModel = OBJLoader.loadModel("/models/squarePlain.obj");
         quitModel.setMaterial(new Material(new Texture("/textures/quit.png"), 1));
         Entity quitEntity = new Entity(quitModel);
-        quitEntity.setScale(100);
-        quitEntity.setPosition(0, -120, 0);
+        quitEntity.setScale(.30f);
+        quitEntity.setPosition(0, -.50f, 0);
         entities.add(quitEntity);
     }
 
@@ -75,16 +75,16 @@ public class MenuScene extends Scene {
         }
 
         if (mouseInput.isLeftButtonPressed()) {
-            double x = mouseInput.getCurrentPos().x, y = mouseInput.getCurrentPos().y;
-            float offsetX = window.getWidth() / 2;
-            float offsetY = window.getHeight() / 2 + 60;
-            if (x > -100 + offsetX && x < 100 + offsetX && y > -35 + offsetY && y < 35 + offsetY) {
+            double x = mouseInput.getCurrentPos().x/window.getWidth(), y = mouseInput.getCurrentPos().y/window.getHeight();
+            float offsetX = .5f;
+            float offsetY = .65f;
+            if (x > -.085f + offsetX && x < .085f + offsetX && y > -.05f + offsetY && y < .05f + offsetY) {
                 switchScene(new GameScene());
             }
 
-            offsetY += 65;
-            if (x > -100 + offsetX && x < 100 + offsetX && y > -20 + offsetY && y < 20 + offsetY) {
-                System.exit(0);
+            offsetY = .755f;
+            if (x > -.085f + offsetX && x < .085f + offsetX && y > -.025f + offsetY && y < .025f + offsetY) {
+                window.close();
             }
         }
     }
