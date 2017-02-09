@@ -45,33 +45,45 @@ public class Level {
         return r;
     }
 
+    public Node getNode(int col, int row) {
+        Node r = null;
+        for (Node node: nodeList) {
+            int col0 = node.getCol();
+            int row0 = node.getRow();
+            if (node.getCol() == col && node.getRow() == row) {
+                r = node;
+            }
+        }
+        return r;
+    }
+
     private void initializeBlocksNodesBreadcrumps() throws Exception {
         this.blockList = new ArrayList<>();
         this.breadcrumpList = new ArrayList<>();
         this.nodeList = new ArrayList<>();
         float scale = .2f;
         float levelHeight = -2f;
-        for (int row = 0; row < this.height; row ++) {
-            for (int col = 0; col < this.width; col ++) {
-                Block block = new Block(col, row);
+        for (int x = 0; x < this.width; x ++) {
+            for (int y = 0; y < this.height; y ++) {
+                Block block = new Block(x, y);
                 block.setScale(scale/2f);
-                switch (this.level[col][row]) {
+                switch (this.level[x][y]) {
                     case Level.VOID:
 //                        block.setPosition(col * scale, levelHeight - scale, row * scale);
 //                        block.setColor(new Vector3f(1, 0, 0));
                         break;
                     case Level.NODE:
-                        block.setPosition(col * scale, levelHeight, row * scale);
+                        block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(1, 0, 0));
                         this.nodeList.add(new Node(block));
 //                        this.breadcrumpList.add(new Breadcrump(block));
                         break;
                     case Level.CONNECTOR_COL:
-                        block.setPosition(col * scale, levelHeight, row * scale);
+                        block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(.9f, 0, 0));
                         break;
                     case Level.CONNECTOR_ROW:
-                        block.setPosition(col * scale, levelHeight, row * scale);
+                        block.setPosition(x * scale, levelHeight, y * scale);
                         block.setColor(new Vector3f(.8f, .3f, .3f));
                         break;
 
@@ -85,42 +97,42 @@ public class Level {
         int[] trail = {Level.NODE, Level.CONNECTOR_COL, Level.CONNECTOR_ROW};
 
         HashMap<String, Integer[]> directions = new HashMap<>();
-        directions.put("left", new Integer[] {0, -1});
-        directions.put("right", new Integer[] {0, 1});
-        directions.put("up", new Integer[] {-1, 0});
-        directions.put("down", new Integer[] {1, 0});
+        directions.put("left", new Integer[] {-1, 0});
+        directions.put("right", new Integer[] {1, 0});
+        directions.put("up", new Integer[] {0, -1});
+        directions.put("down", new Integer[] {0, 1});
 
         for (Node node: nodeList) {
             for (Map.Entry<String, Integer[]> direction: directions.entrySet()) {
-                int row, col, rowOffset, valRow, colOffset, valCol;
-                row = node.getRow();
-                col = node.getCol();
+                int x, y, xOffset, valX, yOffset, valY;
+                x = node.getCol();
+                y = node.getRow();
 
-                rowOffset = valRow = direction.getValue()[0];
-                colOffset = valCol = direction.getValue()[1];
+                xOffset = valX = direction.getValue()[0];
+                yOffset = valY = direction.getValue()[1];
 
                 try {
-                    int except = this.level[row+rowOffset][col+colOffset];
+                    int except = this.level[x+xOffset][y+yOffset];
                 } catch (ArrayIndexOutOfBoundsException e) {
                     break;
                 }
 
-                int val = this.level[col+colOffset][row+rowOffset];
-                int val0 = this.level[col+colOffset][row+rowOffset];
+                int val = this.level[x+xOffset][y+yOffset];
+                int val0 = this.level[x+xOffset][y+yOffset];
 
-                if (IntStream.of(trail).anyMatch(x -> x == val)) {
-                    while (val0 == Level.CONNECTOR_COL || val == Level.CONNECTOR_ROW) {
-                        rowOffset += valRow;
-                        colOffset += valCol;
+                if (IntStream.of(trail).anyMatch(i -> i == val)) {
+                    while (val0 == Level.CONNECTOR_COL || val0 == Level.CONNECTOR_ROW) {
+                        xOffset += valX;
+                        yOffset += valY;
                         try {
-                            int except = this.level[col+colOffset][row+rowOffset];
+                            int except = this.level[x+xOffset][y+yOffset];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             break;
                         }
-                        val0 = this.level[col+colOffset][row+rowOffset];
+                        val0 = this.level[x+xOffset][y+yOffset];
 
                     }
-                    node.setNeighbors(new Node(this.getBlock(col+colOffset, col+colOffset)),
+                    node.setNeighbors(this.getNode(x+xOffset, y+yOffset),
                             direction.getKey());
                 }
 

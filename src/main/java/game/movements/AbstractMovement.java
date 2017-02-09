@@ -2,7 +2,8 @@ package game.movements;
 
 import engine.Entity;
 import game.entities.Node;
-import org.joml.Vector3f;
+import game.entities.Vector3f;
+
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,11 +14,11 @@ import java.util.Map;
  */
 public abstract class AbstractMovement {
 
-    public final Vector3f UP = new Vector3f(0, -.01f, 0);
-    public final Vector3f DOWN = new Vector3f (0, 0, .01f);
-    public final Vector3f RIGHT = new Vector3f (0, 0, 0);
-    public final Vector3f LEFT = new Vector3f (.01f, 0, 0);
-    public final Vector3f STOP = new Vector3f (0, 0, 0);
+    public final Vector3f UP = new Vector3f(.0000f, .0000f, -.01f);
+    public final Vector3f DOWN = new Vector3f (.0000f, .0000f, .01f);
+    public final Vector3f RIGHT = new Vector3f (.01f, .0000f, .0000f);
+    public final Vector3f LEFT = new Vector3f (-.01f, .0000f, .0000f);
+    public final Vector3f STOP = new Vector3f (.0000f, .0000f, .0000f);
     private final Map<String, Vector3f> directions = new HashMap<>();
 
     private Node currentNode;

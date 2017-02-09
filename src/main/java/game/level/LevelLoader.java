@@ -14,21 +14,21 @@ public class LevelLoader {
         ArrayList nodeList = new ArrayList();
         int[][] level = new int[lines.get(0).replaceAll(" ", "").length()][lines.size()];
 
-        for (int row = 0; row < lines.size(); row ++) {
-            String line = lines.get(row).replaceAll(" ", "");
-            for (int col = 0; col < line.length(); col ++) {
-                switch(line.charAt(col)) {
+        for (int y = 0; y < lines.size(); y ++) {
+            String line = lines.get(y).replaceAll(" ", "");
+            for (int x = 0; x < line.length(); x ++) {
+                switch(line.charAt(x)) {
                     case '0':
-                        level[col][row] = Level.VOID;
+                        level[x][y] = Level.VOID;
                         break;
                     case '+':
-                        level[col][row] = Level.NODE;
+                        level[x][y] = Level.NODE;
                         break;
                     case '|':
-                        level[col][row] = Level.CONNECTOR_ROW;
+                        level[x][y] = Level.CONNECTOR_ROW;
                         break;
                     case '-':
-                        level[col][row] = Level.CONNECTOR_COL;
+                        level[x][y] = Level.CONNECTOR_COL;
                         break;
                 }
             }

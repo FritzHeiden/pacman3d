@@ -1,7 +1,8 @@
 package engine;
 
-import org.joml.Vector3f;
+
 import engine.graph.Model;
+import game.entities.Vector3f;
 
 public class Entity {
     protected Model model;
@@ -11,7 +12,7 @@ public class Entity {
 
     public Entity(Model model) {
         this.model = model;
-        position = new Vector3f(0, 0, 0);
+        position = new Vector3f(.0f, .0f, .0f);
         scale = 1;
         rotation = new Vector3f(0, 0, 0);
     }
