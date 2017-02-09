@@ -10,6 +10,12 @@ public class Entity {
     protected float scale;
     protected Vector3f rotation;
 
+    public Entity() {
+        position = new Vector3f(.0f, .0f, .0f);
+        scale = 1;
+        rotation = new Vector3f(0, 0, 0);
+    }
+
     public Entity(Entity entity) {
         this.model = new Model(entity.getModel());
         this.position = new Vector3f(entity.position);
