@@ -29,7 +29,7 @@ public abstract class AbstractMovement {
         this.currentNode = node;
         this.nextNode = node;
         this.movingObject = movingObject;
-        this.direction = this.RIGHT;
+        this.direction = this.STOP;
 
         directions.put("UP", this.UP);
         directions.put("DOWN", this.DOWN);
