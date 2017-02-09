@@ -17,7 +17,7 @@ public class Breadcrump extends Entity {
         super();
 
         this.model = OBJLoader.loadModel("/models/cube.obj");
-        Material material = new Material(new org.joml.Vector3f(.2f, .2f, .2f), 1);
+        Material material = new Material(new org.joml.Vector3f(.8f, .8f, .1f), 1);
 
         this.model.setMaterial(material);
         this.setScale(0.5f);

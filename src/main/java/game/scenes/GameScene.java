@@ -58,7 +58,7 @@ public class GameScene extends Scene {
         camera.setRotation(90f, 0, 0);
 
         // Make entities
-        pacman = new Pacman(this.level.getNodeList().get(0), window);
+        pacman = new Pacman(this.level.getNodeList().get(0), window, this.level.getBreadcrumpList());
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(5));

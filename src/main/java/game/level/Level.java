@@ -78,19 +78,19 @@ public class Level {
                         this.nodeList.add(node);
                         Breadcrump breadcrump = new Breadcrump();
                         breadcrump.setScale(scale/10f);
-                        breadcrump.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump.setPosition(x * scale, levelHeight, y*scale);
                         this.breadcrumpList.add(breadcrump);
                         break;
                     case Level.CONNECTOR_COL:
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
-                        breadcrump0.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump0.setPosition(x * scale, levelHeight, y*scale);
                         this.breadcrumpList.add(breadcrump0);
                         break;
                     case Level.CONNECTOR_ROW:
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
-                        breadcrump1.setPosition(x * scale, levelHeight + .1f, y*scale);
+                        breadcrump1.setPosition(x * scale, levelHeight, y*scale);
                         this.breadcrumpList.add(breadcrump1);
                         break;
 
