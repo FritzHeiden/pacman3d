@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by kilian on 08.02.17.
  */
-public class Node {
+public class Node extends Entity {
 
     private Block block;
     private Node leftNeighbor;
@@ -24,9 +24,12 @@ public class Node {
     private Node upperNeighbor;
     private Node lowerNeighbor;
     private Map<String, Node> neighborMap;
+    private int col, row;
 
-    public Node(Block block) throws Exception {
-        this.block = block;
+    public Node(int col,int row) throws Exception {
+        this.col = col;
+        this.row = row;
+//        this.block = block;
         this.neighborMap = new HashMap<>();
     }
 
@@ -141,19 +144,20 @@ public class Node {
     }
 
     public int getRow() {
-        return this.block.getRow();
+        return this.row;
     }
 
     public int getCol(){
-        return this.block.getCol();
+//        return this.block.getCol();
+        return this.col;
     }
 
     public Block getBlock() {
         return block;
     }
 
-    public game.entities.Vector3f getPosition() {
-        return this.block.getPosition();
+    public void setColor(Vector3f color) {
+        this.model.setMaterial(new Material(color, 1));
     }
 
 }

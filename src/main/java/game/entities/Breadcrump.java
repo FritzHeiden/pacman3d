@@ -14,7 +14,7 @@ import org.joml.*;
 public class Breadcrump extends Entity {
 
     public Breadcrump() throws Exception {
-        super(null);
+        super();
 
         this.model = OBJLoader.loadModel("/models/cube.obj");
         Material material = new Material(new org.joml.Vector3f(.2f, .2f, .2f), 1);

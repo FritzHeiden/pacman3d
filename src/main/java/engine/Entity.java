@@ -51,7 +51,7 @@ public class Entity {
     public void update() {}
 
     public Vector3f getPosition() {
-        return position;
+        return this.position;
     }
 
     public void setPosition(float x, float y, float z) {

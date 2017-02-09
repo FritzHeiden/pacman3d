@@ -67,32 +67,27 @@ public class Level {
             for (int y = 0; y < this.height; y ++) {
                 Block block = new Block(x, y);
                 block.setScale(scale/2f);
-
+                block.setPosition(x * scale, levelHeight-.2f, y * scale);
                 switch (this.level[x][y]) {
                     case Level.VOID:
-//                        block.setPosition(col * scale, levelHeight - scale, row * scale);
-//                        block.setColor(new Vector3f(1, 0, 0));
+                        block = null;
                         break;
                     case Level.NODE:
-                        block.setPosition(x * scale, levelHeight, y * scale);
-                        block.setColor(new Vector3f(1, 0, 0));
-                        this.nodeList.add(new Node(block));
+                        Node node = new Node(x, y);
+                        node.setPosition(x * scale, levelHeight, y * scale);
+                        this.nodeList.add(node);
                         Breadcrump breadcrump = new Breadcrump();
                         breadcrump.setScale(scale/10f);
                         breadcrump.setPosition(x * scale, levelHeight + .1f, y*scale);
                         this.breadcrumpList.add(breadcrump);
                         break;
                     case Level.CONNECTOR_COL:
-                        block.setPosition(x * scale, levelHeight, y * scale);
-                        block.setColor(new Vector3f(.9f, 0, 0));
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
                         breadcrump0.setPosition(x * scale, levelHeight + .1f, y*scale);
                         this.breadcrumpList.add(breadcrump0);
                         break;
                     case Level.CONNECTOR_ROW:
-                        block.setPosition(x * scale, levelHeight, y * scale);
-                        block.setColor(new Vector3f(.8f, .3f, .3f));
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
                         breadcrump1.setPosition(x * scale, levelHeight + .1f, y*scale);
@@ -100,7 +95,10 @@ public class Level {
                         break;
 
                 }
-                this.blockList.add(block);
+                if (block != null) {
+                    block.setColor(new Vector3f(1, 0, 0));
+                    this.blockList.add(block);
+                }
             }
         }
     }

@@ -21,7 +21,8 @@ public class KeyMovementStrategy extends AbstractMovement {
     }
 
     public void move() {
-        this.opositeDirection();
+//        this.opositeDirection();
+        System.out.println(this.getMovingObject().getPosition().distance(this.getNextNodePosition()));
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
             this.setCurrentNode(this.getNextNode());
             this.keyContinuous();

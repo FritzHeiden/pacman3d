@@ -27,7 +27,7 @@ public class Pacman extends Entity {
 
         this.model.setMaterial(material);
         this.setScale(0.2f);
-        this.setPosition(node.getBlock().getPosition());
+        this.setPosition(node.getPosition());
     }
 
     @Override
