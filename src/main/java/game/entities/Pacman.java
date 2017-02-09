@@ -14,16 +14,12 @@ import org.joml.Vector3f;
 public class Pacman extends Entity {
 
     private float speed;
-    private Node currentNode;
     private AbstractMovement movementStrategy;
 
 
     public Pacman(Node node, Window window) throws Exception {
         super(null);
-
-
-        this.currentNode = node;
-        this.movementStrategy = new KeyMovementStrategy(this.currentNode, this, window);
+        this.movementStrategy = new KeyMovementStrategy(node, this, window);
         this.speed = .10f;
 
         this.model = OBJLoader.loadModel("/models/pacman.obj");
@@ -31,16 +27,12 @@ public class Pacman extends Entity {
 
         this.model.setMaterial(material);
         this.setScale(0.2f);
-        this.setPosition(this.currentNode.getBlock().getPosition());
+        this.setPosition(node.getBlock().getPosition());
     }
 
+    @Override
     public void update() {
         this.movementStrategy.move();
-    }
-
-    public void setCurrentNode(Node currentNode) {
-        this.currentNode = currentNode;
-        this.setPosition(currentNode.getBlock().getPosition());
     }
 
     @Override
@@ -52,37 +44,4 @@ public class Pacman extends Entity {
         }
         super.movePosition(offset.x, offset.y, offset.z);
     }
-
-//    public float getSpeed() {
-//        return speed;
-//    }
-//
-//    public void setSpeed(float speed) {
-//        this.speed = speed;
-//    }
-
-//    @Override
-//    public void setPosition(float x, float y, float z) {
-//        super.setPosition(x, y, z);
-//    }
-
-//    @Override
-//    public float getScale() {
-//        return super.getScale();
-//    }
-
-//    @Override
-//    public void setScale(float scale) {
-//        super.setScale(scale);
-//    }
-//
-//    @Override
-//    public Vector3f getRotation() {
-//        return super.getRotation();
-//    }
-//
-//    @Override
-//    public void setRotation(float x, float y, float z) {
-//        super.setRotation(x, y, z);
-//    }
 }
