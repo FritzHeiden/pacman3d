@@ -61,20 +61,20 @@ public class GameScene extends Scene {
         pacman = new Pacman(this.level.getNodeList().get(0), window);
         this.entities.add(pacman);
 
-        Ghost redGhost = new Ghost(Ghost.RED);
-        redGhost.setPosition(-3f, 0, -4);
+        Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(5));
+//        redGhost.setPosition(-3f, 0, -4);
         this.entities.add(redGhost);
 
-        Ghost pinkGhost = new Ghost(Ghost.PINK);
-        pinkGhost.setPosition(-1f, 0, -4);
+        Ghost pinkGhost = new Ghost(Ghost.PINK, this.level.getNodeList().get(10));
+//        pinkGhost.setPosition(-1f, 0, -4);
         this.entities.add(pinkGhost);
-
-        Ghost orangeGhost = new Ghost(Ghost.ORANGE);
-        orangeGhost.setPosition(1f, 0, -4);
+//
+        Ghost orangeGhost = new Ghost(Ghost.ORANGE, this.level.getNodeList().get(15));
+//        orangeGhost.setPosition(1f, 0, -4);
         this.entities.add(orangeGhost);
-
-        Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE);
-        turquoiseGhost.setPosition(3f, 0, -4);
+//
+        Ghost turquoiseGhost = new Ghost(Ghost.TURQUOISE, this.level.getNodeList().get(20));
+//        turquoiseGhost.setPosition(3f, 0, -4);
         this.entities.add(turquoiseGhost);
 
         ambientLight = new Vector3f(0.6f, 0.6f, 0.6f);
@@ -121,7 +121,9 @@ public class GameScene extends Scene {
         camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
         camera.moveRotation(0, 0, 0);
         pointLights.get(0).setPosition(camera.getPosition());
-        pacman.update();
+
+        for (Entity entity: entities)
+            entity.update();
 
         // Update camera based on mouse            
         if (mouseInput.isRightButtonPressed()) {

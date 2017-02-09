@@ -8,6 +8,11 @@ import game.level.Block;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by kilian on 08.02.17.
  */
@@ -18,9 +23,11 @@ public class Node {
     private Node rightNeighbor;
     private Node upperNeighbor;
     private Node lowerNeighbor;
+    private Map<String, Node> neighborMap;
 
     public Node(Block block) throws Exception {
         this.block = block;
+        this.neighborMap = new HashMap<>();
     }
 
     public void setNeighbors(Node node, String position) {
@@ -42,6 +49,7 @@ public class Node {
 
     public void setLeftNeighbor(Node leftNeighbor, Boolean firstTime) {
         this.leftNeighbor = leftNeighbor;
+        this.neighborMap.put("LEFT", this.leftNeighbor);
         if (firstTime)
             leftNeighbor.setRightNeighbor(this, false);
     }
@@ -52,6 +60,7 @@ public class Node {
 
     public void setRightNeighbor(Node rightNeighbor, Boolean firstTime) {
         this.rightNeighbor = rightNeighbor;
+        this.neighborMap.put("RIGHT", this.getRightNeighbor());
         if (firstTime)
             rightNeighbor.setLeftNeighbor(this, false);
     }
@@ -62,6 +71,7 @@ public class Node {
 
     public void setUpperNeighbor(Node upperNeighbor, boolean firstTime) {
         this.upperNeighbor = upperNeighbor;
+        this.neighborMap.put("UP", this.upperNeighbor);
         if (firstTime)
             upperNeighbor.setLowerNeighbor(this, false);
     }
@@ -70,8 +80,25 @@ public class Node {
         this.upperNeighbor.setUpperNeighbor(upperNeighbor, false);
     }
 
+    public Map<String, Node> getNeighborMap() {
+        Map<String, Node> map = new HashMap<>();
+
+        if (this.leftNeighbor != null)
+            map.put("LEFT", this.leftNeighbor);
+        if (this.rightNeighbor != null)
+            map.put("RIGHT", this.rightNeighbor);
+        if (this.upperNeighbor != null)
+            map.put("UP", this.upperNeighbor);
+        if (this.lowerNeighbor != null)
+            map.put("DOWN", this.lowerNeighbor);
+
+        return map;
+    }
+
     public void setLowerNeighbor(Node lowerNeighbor, boolean firstTime) {
         this.lowerNeighbor = lowerNeighbor;
+        this.neighborMap.put("DOWN", this.lowerNeighbor);
+
         if (firstTime)
             lowerNeighbor.setUpperNeighbor(this, false);
     }
@@ -124,4 +151,9 @@ public class Node {
     public Block getBlock() {
         return block;
     }
+
+    public game.entities.Vector3f getPosition() {
+        return this.block.getPosition();
+    }
+
 }

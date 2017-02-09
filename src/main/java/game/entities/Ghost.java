@@ -3,6 +3,8 @@ package game.entities;
 import engine.Entity;
 import engine.graph.Material;
 import engine.graph.OBJLoader;
+import game.movements.AbstractMovement;
+import game.movements.AutoMovementStrategy;
 import org.joml.Vector3f;
 
 /**
@@ -13,10 +15,12 @@ public class Ghost extends Entity {
 
     private int color;
     private float speed;
+    private AbstractMovement movementStrategy;
 
-    public Ghost(int color) throws Exception {
+    public Ghost(int color, Node node) throws Exception {
         super(null);
 
+        this.movementStrategy = new AutoMovementStrategy(node, this);
         this.model = OBJLoader.loadModel("/models/ghost.obj");
 
         this.speed = .2f;
@@ -44,7 +48,12 @@ public class Ghost extends Entity {
 
         this.model.setMaterial(material);
         this.setScale(0.5f);
-        this.setPosition(0, -.5f, -2);
+        this.setPosition(node.getPosition());
+    }
+
+    @Override
+    public void update() {
+        this.movementStrategy.move();
     }
 
     @Override

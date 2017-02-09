@@ -149,21 +149,6 @@ public class Level {
     }
 
 
-//    public int getTile(int x, int y) {
-//        return level[x][y];
-//    }
-//
-//    public void setTile(int x, int y, int type) {
-//        switch(type) {
-//            case VOID:
-//            case PATH:
-//            case NODE:
-//                this.level[x][y] = type;
-//                break;
-//            default:
-//                return;
-//        }
-//    }
 
     public int[][] getLevel() {
         return level;
