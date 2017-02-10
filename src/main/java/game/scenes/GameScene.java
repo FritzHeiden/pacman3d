@@ -60,7 +60,7 @@ public class GameScene extends Scene {
         this.level = LevelLoader.load("/level/maze.txt");
 
         camera.setPosition(level.getWidth() / 2 * .2f, 4, level.getHeight() / 2 * .2f);
-        camera.setRotation(0f, 0, 0);
+        camera.setRotation(30f, 180, 0);
 
         // Make entities
         pacman = new Pacman(this.level.getNodeList().get(0), window, this);
@@ -136,7 +136,6 @@ public class GameScene extends Scene {
 //        if (mouseInput.isRightButtonPressed()) {
             Vector2f rotVec = mouseInput.getDisplVec();
             camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
-        System.out.println(camera.getRotation().y);
 //        }
 
         Vector3f direction = new Vector3f(

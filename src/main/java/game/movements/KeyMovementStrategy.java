@@ -3,11 +3,7 @@ package game.movements;
 import engine.Entity;
 import engine.Window;
 import game.entities.Node;
-import org.joml.Vector3f;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+import game.entities.Vector3f;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -27,7 +23,7 @@ public class KeyMovementStrategy extends AbstractMovement {
     }
 
     public void move() {
-        this.opositeDirection();
+        this.oppositeDirection();
         super.move();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
             this.setCurrentNode(this.getNextNode());
@@ -53,56 +49,102 @@ public class KeyMovementStrategy extends AbstractMovement {
         if (this.window.isKeyPressed(GLFW_KEY_UP)) {
             if (this.getCurrentNode().hasUpperNeighbor() && this.directionUpDown()) {
                 this.setNextNode(this.getCurrentNode().getUpperNeighbor());
-                this.setDirection(this.UP);
+                this.setDirection(getNewDirection(this.UP));
                 this.directionString = "UP";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_DOWN)) {
             if (this.getCurrentNode().hasLowerNeighbor() && this.directionUpDown()) {
                 this.setNextNode(this.getCurrentNode().getLowerNeighbor());
-                this.setDirection(this.DOWN);
+                this.setDirection(getNewDirection(this.DOWN));
                 this.directionString = "DOWN";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_RIGHT) && this.directionLeftRight()) {
             if (this.getCurrentNode().hasRightNeigbor()) {
                 this.setNextNode(this.getCurrentNode().getRightNeighbor());
-                this.setDirection(this.RIGHT);
+                this.setDirection(getNewDirection(this.RIGHT));
                 this.directionString = "RIGHT";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_LEFT) && this.directionLeftRight()) {
             if (this.getCurrentNode().hasLeftNeighbor()) {
                 this.setNextNode(this.getCurrentNode().getLeftNeighbor());
-                this.setDirection(this.LEFT);
+                this.setDirection(getNewDirection(this.LEFT));
                 this.directionString = "LEFT";
             }
         }
     }
 
-    private void opositeDirection() {
+    private void oppositeDirection() {
         if (this.window.isKeyPressed(GLFW_KEY_UP)) {
             if (this.directionString.equals("DOWN")) {
                 this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.UP);
+                this.setDirection(getNewDirection(this.UP));
                 this.directionString = "UP";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_DOWN)) {
             if (this.directionString.equals("UP")) {
                 this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.DOWN);
+                this.setDirection(getNewDirection(this.DOWN));
                 this.directionString = "DOWN";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_LEFT)) {
             if (this.directionString.equals("RIGHT")) {
                 this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.LEFT);
+                this.setDirection(getNewDirection(this.LEFT));
                 this.directionString = "LEFT";
             }
         } else if (this.window.isKeyPressed(GLFW_KEY_RIGHT)) {
             if (this.directionString.equals("LEFT")) {
                 this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.RIGHT);
+                this.setDirection(getNewDirection(this.RIGHT));
                 this.directionString = "RIGHT";
             }
         }
+    }
+
+    private Vector3f getNewDirection(Vector3f pressedDirection) {
+        return pressedDirection;
+//        if (this.getDirection() == this.UP) {
+//            if (pressedDirection == this.UP) {
+//                return this.UP;
+//            } else if (pressedDirection == this.LEFT) {
+//                return this.LEFT;
+//            } else if (pressedDirection == this.RIGHT) {
+//                return this.RIGHT;
+//            } else {
+//                return this.DOWN;
+//            }
+//        } else if (this.getDirection() == this.LEFT) {
+//            if (pressedDirection == this.UP) {
+//                return this.LEFT;
+//            } else if (pressedDirection == this.LEFT) {
+//                return this.DOWN;
+//            } else if (pressedDirection == this.RIGHT) {
+//                return this.UP;
+//            } else {
+//                return this.RIGHT;
+//            }
+//        } else if (this.getDirection() == this.RIGHT) {
+//            if (pressedDirection == this.UP) {
+//                return this.RIGHT;
+//            } else if (pressedDirection == this.LEFT) {
+//                return this.UP;
+//            } else if (pressedDirection == this.RIGHT) {
+//                return this.DOWN;
+//            } else {
+//                return this.LEFT;
+//            }
+//        } else {
+//            if (pressedDirection == this.UP) {
+//                return this.DOWN;
+//            } else if (pressedDirection == this.LEFT) {
+//                return this.RIGHT;
+//            } else if (pressedDirection == this.RIGHT) {
+//                return this.LEFT;
+//            } else {
+//                return this.UP;
+//            }
+//
+//        }
     }
 
     @Override

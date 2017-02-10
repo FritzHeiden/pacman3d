@@ -54,6 +54,8 @@ public class MenuScene extends Scene {
         quitEntity.setScale(.30f);
         quitEntity.setPosition(0, -.50f, 0);
         entities.add(quitEntity);
+
+        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
     public void input(Window window, MouseInput mouseInput) {

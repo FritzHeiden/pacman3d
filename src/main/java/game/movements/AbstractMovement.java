@@ -13,12 +13,12 @@ import java.util.Map;
  */
 public abstract class AbstractMovement {
 
-    public final Vector3f UP = new Vector3f(0, 0, -.01f);
-    public final Vector3f DOWN = new Vector3f (0, 0, .01f);
-    public final Vector3f RIGHT = new Vector3f (.01f, 0, 0);
-    public final Vector3f LEFT = new Vector3f (-.01f, 0, 0);
-    public final Vector3f STOP = new Vector3f (0, 0, 0);
-    public final Vector3f FALL = new Vector3f(0, -.1f, 0);
+    public static final Vector3f UP = new Vector3f(0, 0, -.01f);
+    public static final Vector3f DOWN = new Vector3f (0, 0, .01f);
+    public static final Vector3f RIGHT = new Vector3f (.01f, 0, 0);
+    public static final Vector3f LEFT = new Vector3f (-.01f, 0, 0);
+    public static final Vector3f STOP = new Vector3f (0, 0, 0);
+    public static final Vector3f FALL = new Vector3f(0, -.1f, 0);
     private final Map<String, Vector3f> directions = new HashMap<>();
 
     private Node currentNode;

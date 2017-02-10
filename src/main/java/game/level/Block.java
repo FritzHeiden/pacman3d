@@ -39,4 +39,8 @@ public class Block extends Entity {
     public void setColor(Vector3f color) {
         this.model.setMaterial(new Material(color, 1));
     }
+
+    public void setMaterial(Material material) {
+        this.model.setMaterial(material);
+    }
 }

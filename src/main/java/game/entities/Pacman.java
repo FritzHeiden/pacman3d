@@ -4,7 +4,6 @@ import engine.Entity;
 import engine.Window;
 import engine.graph.Material;
 import engine.graph.OBJLoader;
-import game.movements.AbstractMovement;
 import game.movements.KeyMovementStrategy;
 import game.scenes.GameScene;
 import org.joml.Vector3f;
@@ -49,6 +48,16 @@ public class Pacman extends Entity {
     @Override
     public int update() {
         this.movementStrategy.move();
+//        if (movementStrategy.getDirection() == AbstractMovement.UP) {
+//            setRotation(0, 0, 0);
+//        } else if (movementStrategy.getDirection() == AbstractMovement.LEFT) {
+//            setRotation(0, 90, 0);
+//        } else if (movementStrategy.getDirection() == AbstractMovement.RIGHT) {
+//            setRotation(0, -90, 0);
+//        } else {
+//            setRotation(0, 180, 0);
+//        }
+        System.out.println(movementStrategy.getDirection().y);
         return this.eatBreadcrumps();
     }
 

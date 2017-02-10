@@ -1,8 +1,9 @@
 package game.level;
 
+import engine.graph.Material;
+import engine.graph.Texture;
 import game.entities.Breadcrump;
 import game.entities.Node;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,23 +82,27 @@ public class Level {
                         breadcrump.setScale(scale/10f);
                         breadcrump.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump);
+                        block.setMaterial(new Material(new Texture("/textures/cross.png"), 1));
                         break;
                     case Level.CONNECTOR_COL:
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
                         breadcrump0.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump0);
+                        block.setMaterial(new Material(new Texture("/textures/straight.png"), 1));
                         break;
                     case Level.CONNECTOR_ROW:
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
                         breadcrump1.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump1);
+                        block.setMaterial(new Material(new Texture("/textures/straight.png"), 1));
+                        block.setRotation(0, 90, 0);
                         break;
 
                 }
                 if (block != null) {
-                    block.setColor(new Vector3f(1, 0, 0));
+//                    block.setColor(new Vector3f(1, 0, 0));
                     this.blockList.add(block);
                 }
             }
