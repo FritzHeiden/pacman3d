@@ -4,6 +4,7 @@ import engine.Entity;
 import engine.graph.Material;
 import engine.graph.OBJLoader;
 import game.movements.AbstractMovement;
+import game.movements.AiMovementStrategy;
 import game.movements.AutoMovementStrategy;
 import org.joml.Vector3f;
 
@@ -18,12 +19,13 @@ public class Ghost extends Entity {
     private AbstractMovement movementStrategy;
     private Pacman pacman;
     private boolean killedPacman;
+    private boolean randomMovement;
 
 
     public Ghost(int color, Node node, Pacman pacman) throws Exception {
         super();
         this.pacman = pacman;
-        this.movementStrategy = new AutoMovementStrategy(node, this);
+        this.movementStrategy = new AiMovementStrategy(node, this);
         this.model = OBJLoader.loadModel("/models/ghost.obj");
 
         this.speed = .2f;
@@ -76,6 +78,10 @@ public class Ghost extends Entity {
         return killPacman();
     }
 
+    public void changeMovementStrategy() {
+        this.randomMovement = false;
+    }
+
     @Override
     public void movePosition(float offsetX, float offsetY, float offsetZ) {
         Vector3f offset = new Vector3f(offsetX, offsetY, offsetZ);
@@ -112,5 +118,9 @@ public class Ghost extends Entity {
     @Override
     public void setRotation(float x, float y, float z) {
         super.setRotation(x, y, z);
+    }
+
+    public Pacman getPacman() {
+        return pacman;
     }
 }
