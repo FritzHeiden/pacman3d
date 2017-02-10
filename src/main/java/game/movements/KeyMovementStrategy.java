@@ -122,7 +122,8 @@ public class KeyMovementStrategy extends AbstractMovement {
         System.out.println(this.getMovingObject().getPosition() + " " + this.killPosition);
         if (this.getMovingObject().getPosition().distance(this.killPosition) < .01f) {
             this.setDirection(this.STOP);
-            this.getMovingObject().setPosition(this.getCurrentPosition().x, this.getCurrentPosition().y + .17f, this.getCurrentPosition().z);
+            this.getMovingObject().setPosition(this.getNextNodePosition().x, this.getNextNodePosition().y + .17f,
+                    this.getNextNodePosition().z);
             return true;
         }
         return false;
