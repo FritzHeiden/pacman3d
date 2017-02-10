@@ -59,7 +59,7 @@ public class OBJLoader {
                                       List<Vector3f> normList, List<Face> facesList) {
 
         List<Integer> indices = new ArrayList();
-        // Create position array in the order it has been declared
+
         float[] posArr = new float[posList.size() * 3];
         int i = 0;
         for (Vector3f pos : posList) {
@@ -129,7 +129,7 @@ public class OBJLoader {
             int length = lineTokens.length;
             idxGroup.idxPos = Integer.parseInt(lineTokens[0]) - 1;
             if (length > 1) {
-                // It can be empty if the obj does not define text coords
+
                 String textCoord = lineTokens[1];
                 idxGroup.idxTextCoord = textCoord.length() > 0 ? Integer.parseInt(textCoord) - 1 : IdxGroup.NO_VALUE;
                 if (length > 2) {

@@ -119,6 +119,10 @@ public class GameScene extends Scene {
         } else if (window.isKeyPressed(GLFW_KEY_X)) {
             cameraInc.y = 1;
         }
+
+        if (window.isKeyPressed(GLFW_KEY_ESCAPE)) {
+            switchScene(new MenuScene());
+        }
     }
 
     @Override

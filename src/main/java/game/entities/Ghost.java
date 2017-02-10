@@ -5,7 +5,6 @@ import engine.graph.Material;
 import engine.graph.OBJLoader;
 import game.movements.AbstractMovement;
 import game.movements.AiMovementStrategy;
-import game.movements.AutoMovementStrategy;
 import org.joml.Vector3f;
 
 /**
