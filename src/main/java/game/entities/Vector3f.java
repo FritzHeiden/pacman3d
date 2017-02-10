@@ -49,4 +49,8 @@ public class Vector3f extends org.joml.Vector3f {
     public boolean closeTo(org.joml.Vector3f vector) {
         return new Vector3f(this.x, vector.y, this.z).distance(vector) < .01f;
     }
+
+    public boolean near (org.joml.Vector3f vector) {
+        return new Vector3f(this.x, this.y, this.z).distance(vector) < 2;
+    }
 }
