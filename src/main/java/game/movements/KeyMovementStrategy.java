@@ -28,6 +28,8 @@ public class KeyMovementStrategy extends AbstractMovement {
     }
 
     public void move() {
+        System.out.println(this.getDirection());
+        System.out.println(this.getMovingObject().getPosition());
         this.oppositeDirection();
         super.move();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
@@ -42,7 +44,7 @@ public class KeyMovementStrategy extends AbstractMovement {
                 this.setNextNode((this.getCurrentNode().getLeftNeighbor()));
             } else if (this.getDirection().closeTo(this.RIGHT) && this.getCurrentNode().hasRightNeigbor()) {
                 this.setNextNode(this.getCurrentNode().getRightNeighbor());
-            } else {
+            } else if (!this.getDirection().closeTo(this.FALL)) {
                 this.setDirection(this.STOP);
             }
         }
