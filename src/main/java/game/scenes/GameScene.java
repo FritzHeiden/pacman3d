@@ -98,7 +98,7 @@ public class GameScene extends Scene {
         hud = new HUD(window);
         hud.setScore(51675416);
 
-//        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class GameScene extends Scene {
     @Override
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
-        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+//        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
 
         for (Entity entity : entities)
@@ -137,20 +137,20 @@ public class GameScene extends Scene {
 
 
         // Update camera based on mouse            
-        if (mouseInput.isRightButtonPressed()) {
+//        if (mouseInput.isRightButtonPressed()) {
         Vector2f rotVec = mouseInput.getDisplVec();
         camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
 
 //        System.out.println(camera.getRotation().y);
-        }
+//        }
 
-//        Vector3f direction = new Vector3f(
-//                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
-//                0,
-//                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
-//        camera.setPosition(pacman.getPosition());
-//        camera.getPosition().add(direction);
-//        camera.getPosition().add(0, .5f, 0);
+        Vector3f direction = new Vector3f(
+                (float) Math.cos(Math.toRadians(-90 + camera.getRotation().y)),
+                0,
+                (float) Math.sin(Math.toRadians(-90 + camera.getRotation().y))).mul(-.6f);
+        camera.setPosition(pacman.getPosition());
+        camera.getPosition().add(direction);
+        camera.getPosition().add(0, .5f, 0);
 
         pointLights.get(0).setPosition(pacman.getPosition());
 

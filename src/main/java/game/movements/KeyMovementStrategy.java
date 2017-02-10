@@ -16,6 +16,7 @@ public class KeyMovementStrategy extends AbstractMovement {
     private Vector3f killPosition;
 
     private int moveUpButton, moveDownButton, moveLeftButton, moveRightButton;
+    private boolean downButtonDown;
 
     public KeyMovementStrategy(Node node, Entity movingObject, Window window) {
         super(node, movingObject);
@@ -30,7 +31,7 @@ public class KeyMovementStrategy extends AbstractMovement {
     public void move() {
         System.out.println(this.getDirection());
         System.out.println(this.getMovingObject().getPosition());
-        this.oppositeDirection();
+//        this.oppositeDirection();
         super.move();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
             this.setCurrentNode(this.getNextNode());
@@ -80,33 +81,34 @@ public class KeyMovementStrategy extends AbstractMovement {
         }
     }
 
-    private void oppositeDirection() {
-        if (this.window.isKeyPressed(moveUpButton)) {
-            if (this.directionString.equals("DOWN")) {
-                this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.UP);
-                this.directionString = "UP";
-            }
-        } else if (this.window.isKeyPressed(moveDownButton)) {
-            if (this.directionString.equals("UP")) {
-                this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.DOWN);
-                this.directionString = "DOWN";
-            }
-        } else if (this.window.isKeyPressed(moveLeftButton)) {
-            if (this.directionString.equals("RIGHT")) {
-                this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.LEFT);
-                this.directionString = "LEFT";
-            }
-        } else if (this.window.isKeyPressed(moveRightButton)) {
-            if (this.directionString.equals("LEFT")) {
-                this.setNextNode(this.getCurrentNode());
-                this.setDirection(this.RIGHT);
-                this.directionString = "RIGHT";
-            }
-        }
-    }
+//    private void oppositeDirection() {
+//        if (this.window.isKeyPressed(moveUpButton)) {
+//            if (this.directionString.equals("DOWN")) {
+//                this.setNextNode(this.getCurrentNode());
+//                this.setDirection(this.UP);
+//                this.directionString = "UP";
+//            }
+//        } else if (this.window.isKeyPressed(moveDownButton)) {
+//            if (this.directionString.equals("UP")) {
+//                this.setNextNode(this.getCurrentNode());
+//                this.setDirection(this.DOWN);
+//                this.directionString = "DOWN";
+//            }
+//        }
+////        else if (this.window.isKeyPressed(moveLeftButton)) {
+////            if (this.directionString.equals("RIGHT")) {
+////                    this.setNextNode(this.getCurrentNode());
+////                    this.setDirection(this.LEFT);
+////                this.directionString = "LEFT";
+////            }
+////        } else if (this.window.isKeyPressed(moveRightButton)) {
+////            if (this.directionString.equals("LEFT")) {
+////                this.setNextNode(this.getCurrentNode());
+////                this.setDirection(this.RIGHT);
+////                this.directionString = "RIGHT";
+////            }
+////        }
+//    }
 
     @Override
     public void die() {
@@ -118,9 +120,9 @@ public class KeyMovementStrategy extends AbstractMovement {
     @Override
     public boolean backToLife() {
         System.out.println(this.getMovingObject().getPosition() + " " + this.killPosition);
-        if(this.getMovingObject().getPosition().distance(this.killPosition) < .01f) {
+        if (this.getMovingObject().getPosition().distance(this.killPosition) < .01f) {
             this.setDirection(this.STOP);
-            this.getMovingObject().setPosition(this.getCurrentPosition());
+            this.getMovingObject().setPosition(this.getCurrentPosition().x, this.getCurrentPosition().y + .17f, this.getCurrentPosition().z);
             return true;
         }
         return false;
