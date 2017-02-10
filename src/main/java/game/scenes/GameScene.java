@@ -156,7 +156,7 @@ public class GameScene extends Scene {
 
         if (this.lives == 0)
             this.switchScene(new GameOverScene());
-        
+
         if (level.getBreadcrumpList().size() <= 0) {
             this.switchScene(new WonScene());
         }

@@ -67,7 +67,7 @@ public class Pacman extends Entity {
             setRotation(0, 0, 0);
         }
         updateControls();
-        System.out.println(movementStrategy.getDirection().y);
+//        System.out.println(movementStrategy.getDirection().y);
         return this.eatBreadcrumps();
     }
 

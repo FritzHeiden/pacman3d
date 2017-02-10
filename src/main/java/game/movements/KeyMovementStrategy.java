@@ -29,8 +29,8 @@ public class KeyMovementStrategy extends AbstractMovement {
     }
 
     public void move() {
-        System.out.println(this.getDirection());
-        System.out.println(this.getMovingObject().getPosition());
+//        System.out.println(this.getDirection());
+//        System.out.println(this.getMovingObject().getPosition());
 //        this.oppositeDirection();
         super.move();
         if (this.getMovingObject().getPosition().closeTo(this.getNextNodePosition())) {
@@ -119,7 +119,7 @@ public class KeyMovementStrategy extends AbstractMovement {
 
     @Override
     public boolean backToLife() {
-        System.out.println(this.getMovingObject().getPosition() + " " + this.killPosition);
+//        System.out.println(this.getMovingObject().getPosition() + " " + this.killPosition);
         if (this.getMovingObject().getPosition().distance(this.killPosition) < .01f) {
             this.setDirection(this.STOP);
             this.getMovingObject().setPosition(this.getNextNodePosition().x, this.getNextNodePosition().y + .17f,
