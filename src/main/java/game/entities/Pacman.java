@@ -4,11 +4,14 @@ import engine.Entity;
 import engine.Window;
 import engine.graph.Material;
 import engine.graph.OBJLoader;
+import game.movements.AbstractMovement;
 import game.movements.KeyMovementStrategy;
 import game.scenes.GameScene;
 import org.joml.Vector3f;
 
 import java.util.List;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Created by fritz on 2/8/17.
@@ -48,17 +51,42 @@ public class Pacman extends Entity {
     @Override
     public int update() {
         this.movementStrategy.move();
-//        if (movementStrategy.getDirection() == AbstractMovement.UP) {
-//            setRotation(0, 0, 0);
-//        } else if (movementStrategy.getDirection() == AbstractMovement.LEFT) {
-//            setRotation(0, 90, 0);
-//        } else if (movementStrategy.getDirection() == AbstractMovement.RIGHT) {
-//            setRotation(0, -90, 0);
-//        } else {
-//            setRotation(0, 180, 0);
-//        }
+        if (movementStrategy.getDirection() == AbstractMovement.UP) {
+            setRotation(0, 180, 0);
+        } else if (movementStrategy.getDirection() == AbstractMovement.LEFT) {
+            setRotation(0, 90, 0);
+        } else if (movementStrategy.getDirection() == AbstractMovement.RIGHT) {
+            setRotation(0, -90, 0);
+        } else if (movementStrategy.getDirection() == AbstractMovement.DOWN) {
+            setRotation(0, 0, 0);
+        }
+        updateControls();
         System.out.println(movementStrategy.getDirection().y);
         return this.eatBreadcrumps();
+    }
+
+    private void updateControls() {
+        if (getRotation().y == 180) {
+            movementStrategy.setMoveUpButton(GLFW_KEY_UP);
+            movementStrategy.setMoveDownButton(GLFW_KEY_DOWN);
+            movementStrategy.setMoveLeftButton(GLFW_KEY_LEFT);
+            movementStrategy.setMoveRightButton(GLFW_KEY_RIGHT);
+        } else if (getRotation().y == 0) {
+            movementStrategy.setMoveUpButton(GLFW_KEY_DOWN);
+            movementStrategy.setMoveDownButton(GLFW_KEY_UP);
+            movementStrategy.setMoveLeftButton(GLFW_KEY_RIGHT);
+            movementStrategy.setMoveRightButton(GLFW_KEY_LEFT);
+        } else if (getRotation().y == 90) {
+            movementStrategy.setMoveUpButton(GLFW_KEY_RIGHT);
+            movementStrategy.setMoveDownButton(GLFW_KEY_LEFT);
+            movementStrategy.setMoveLeftButton(GLFW_KEY_UP);
+            movementStrategy.setMoveRightButton(GLFW_KEY_DOWN);
+        } else if (getRotation().y == -90) {
+            movementStrategy.setMoveUpButton(GLFW_KEY_LEFT);
+            movementStrategy.setMoveDownButton(GLFW_KEY_RIGHT);
+            movementStrategy.setMoveLeftButton(GLFW_KEY_DOWN);
+            movementStrategy.setMoveRightButton(GLFW_KEY_UP);
+        }
     }
 
     @Override
@@ -69,6 +97,12 @@ public class Pacman extends Entity {
             offset.mul(speed);
         }
         super.movePosition(offset.x, offset.y, offset.z);
+    }
+
+    @Override
+    public void setRotation(float x, float y, float z) {
+        updateControls();
+        super.setRotation(x, y, z);
     }
 
     public void die() {
