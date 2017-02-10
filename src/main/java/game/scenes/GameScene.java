@@ -127,15 +127,17 @@ public class GameScene extends Scene {
 //        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
 
-        for (Entity entity: entities)
+        for (Entity entity : entities)
             score += entity.update();
         hud.setScore(this.score);
 
 
         // Update camera based on mouse            
 //        if (mouseInput.isRightButtonPressed()) {
-            Vector2f rotVec = mouseInput.getDisplVec();
-            camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+        Vector2f rotVec = mouseInput.getDisplVec();
+        camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+
+//        System.out.println(camera.getRotation().y);
 //        }
 
         Vector3f direction = new Vector3f(
@@ -150,6 +152,7 @@ public class GameScene extends Scene {
         if (this.lives == 0)
             this.switchScene(new MenuScene());
     }
+
 
     @Override
     public void render(Window window) {

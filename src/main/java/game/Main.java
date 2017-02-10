@@ -2,7 +2,6 @@ package game;
 
 import engine.GameEngine;
 import engine.Scene;
-import game.scenes.GameScene;
 import game.scenes.MenuScene;
 
 public class Main {
