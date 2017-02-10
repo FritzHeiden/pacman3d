@@ -155,7 +155,11 @@ public class GameScene extends Scene {
         pointLights.get(0).setPosition(pacman.getPosition());
 
         if (this.lives == 0)
-            this.switchScene(new MenuScene());
+            this.switchScene(new GameOverScene());
+
+        if (level.getBreadcrumpList().size() <= 0) {
+            this.switchScene(new WonScene());
+        }
     }
 
 

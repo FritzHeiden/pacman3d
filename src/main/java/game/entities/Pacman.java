@@ -21,6 +21,7 @@ public class Pacman extends Entity {
     private float speed;
     private KeyMovementStrategy movementStrategy;
     private GameScene gameScene;
+    private final int FORWARD_KEY, BACK_KEY, LEFT_KEY, RIGHT_KEY;
 
     public Pacman(Node node, Window window, GameScene gameScene) throws Exception {
         super();
@@ -35,6 +36,11 @@ public class Pacman extends Entity {
         this.setScale(0.08f);
         this.setPosition(node.getPosition());
         this.getPosition().add(0, .17f, 0);
+
+        FORWARD_KEY = GLFW_KEY_W;
+        BACK_KEY = GLFW_KEY_S;
+        LEFT_KEY = GLFW_KEY_A;
+        RIGHT_KEY = GLFW_KEY_D;
     }
 
     private int eatBreadcrumps() {
@@ -67,25 +73,25 @@ public class Pacman extends Entity {
 
     private void updateControls() {
         if (getRotation().y == 180) {
-            movementStrategy.setMoveUpButton(GLFW_KEY_UP);
-            movementStrategy.setMoveDownButton(GLFW_KEY_DOWN);
-            movementStrategy.setMoveLeftButton(GLFW_KEY_LEFT);
-            movementStrategy.setMoveRightButton(GLFW_KEY_RIGHT);
+            movementStrategy.setMoveUpButton(FORWARD_KEY);
+            movementStrategy.setMoveDownButton(BACK_KEY);
+            movementStrategy.setMoveLeftButton(LEFT_KEY);
+            movementStrategy.setMoveRightButton(RIGHT_KEY);
         } else if (getRotation().y == 0) {
-            movementStrategy.setMoveUpButton(GLFW_KEY_DOWN);
-            movementStrategy.setMoveDownButton(GLFW_KEY_UP);
-            movementStrategy.setMoveLeftButton(GLFW_KEY_RIGHT);
-            movementStrategy.setMoveRightButton(GLFW_KEY_LEFT);
+            movementStrategy.setMoveUpButton(BACK_KEY);
+            movementStrategy.setMoveDownButton(FORWARD_KEY);
+            movementStrategy.setMoveLeftButton(RIGHT_KEY);
+            movementStrategy.setMoveRightButton(LEFT_KEY);
         } else if (getRotation().y == 90) {
-            movementStrategy.setMoveUpButton(GLFW_KEY_RIGHT);
-            movementStrategy.setMoveDownButton(GLFW_KEY_LEFT);
-            movementStrategy.setMoveLeftButton(GLFW_KEY_UP);
-            movementStrategy.setMoveRightButton(GLFW_KEY_DOWN);
+            movementStrategy.setMoveUpButton(RIGHT_KEY);
+            movementStrategy.setMoveDownButton(LEFT_KEY);
+            movementStrategy.setMoveLeftButton(FORWARD_KEY);
+            movementStrategy.setMoveRightButton(BACK_KEY);
         } else if (getRotation().y == -90) {
-            movementStrategy.setMoveUpButton(GLFW_KEY_LEFT);
-            movementStrategy.setMoveDownButton(GLFW_KEY_RIGHT);
-            movementStrategy.setMoveLeftButton(GLFW_KEY_DOWN);
-            movementStrategy.setMoveRightButton(GLFW_KEY_UP);
+            movementStrategy.setMoveUpButton(LEFT_KEY);
+            movementStrategy.setMoveDownButton(RIGHT_KEY);
+            movementStrategy.setMoveLeftButton(BACK_KEY);
+            movementStrategy.setMoveRightButton(FORWARD_KEY);
         }
     }
 
