@@ -64,7 +64,7 @@ public class GameScene extends Scene {
 
         // Make entities
         pacman = new Pacman(this.level.getNodeList().get(0), window, this);
-        pacman.setRotation(0, 90, 0);
+        pacman.setRotation(0, 0, 0);
         this.entities.add(pacman);
 
         Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(1), this.pacman);
@@ -141,9 +141,9 @@ public class GameScene extends Scene {
         }
 
         Vector3f direction = new Vector3f(
-                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
+                (float) Math.cos(Math.toRadians(-90 + camera.getRotation().y)),
                 0,
-                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
+                (float) Math.sin(Math.toRadians(-90 + camera.getRotation().y))).mul(-.6f);
         camera.setPosition(pacman.getPosition());
         camera.getPosition().add(direction);
         camera.getPosition().add(0, .5f, 0);
