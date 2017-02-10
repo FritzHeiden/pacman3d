@@ -40,11 +40,8 @@ public class Window {
 
 
     public void init() {
-        // Setup an error callback. The default implementation
-        // will print the error message in System.err.
         glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
 
-        // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
@@ -74,35 +71,29 @@ public class Window {
         glfwSetKeyCallback(windowHandle, keyCallback = new GLFWKeyCallback() {
             @Override
             public void invoke(long window, int key, int scancode, int action, int mods) {
-                if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
-                    glfwSetWindowShouldClose(window, true);
-                }
+//                if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
+//                    glfwSetWindowShouldClose(window, true);
+//                }
             }
         });
 
-        // Get the resolution of the primary monitor
         GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        // Center our window
         glfwSetWindowPos(
                 windowHandle,
                 (vidmode.width() - width) / 2,
                 (vidmode.height() - height) / 2
         );
 
-        // Make the OpenGL context current
         glfwMakeContextCurrent(windowHandle);
 
         if (isvSync()) {
-            // Enable v-sync
             glfwSwapInterval(1);
         }
 
-        // Make the window visible
         glfwShowWindow(windowHandle);
 
         GL.createCapabilities();
 
-        // Set the clear color
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glEnable(GL_DEPTH_TEST);
     }
