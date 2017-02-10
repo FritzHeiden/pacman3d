@@ -15,3 +15,6 @@ nextNode
 hs_err_pid*
 pacman-3d.iml
 target/
+dependency-reduced-pom.xml
+src/main/java/META-INF/
+/.DS_Store
