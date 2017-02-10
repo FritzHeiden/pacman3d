@@ -4,10 +4,14 @@ import engine.GameEngine;
 import engine.Scene;
 import game.scenes.MenuScene;
 
+import java.io.File;
+
 public class Main {
  
     public static void main(String[] args) {
         try {
+            System.setProperty("org.lwjgl.librarypath", new File("target/natives").getAbsolutePath());
+            System.out.println();
             boolean vSync = true;
             Scene scene = new MenuScene();
 //            Scene scene = new GameScene();
