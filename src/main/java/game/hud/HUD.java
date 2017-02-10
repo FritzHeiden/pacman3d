@@ -20,6 +20,8 @@ public class HUD {
     private int score, live;
     private Window window;
 
+    private Entity scoreLabel;
+
     public HUD(Window window) throws Exception {
         this.score = 0;
         this.live = 3;
@@ -35,14 +37,14 @@ public class HUD {
         Model scoreLabelModel = OBJLoader.loadModel("/models/squarePlain.obj");
 //        Model liveLabelModel = OBJLoader.loadModel("/models/squarePlain.obj");
         scoreLabelModel.setMaterial(new Material(new Texture("/textures/score.png"), 1));
-        Entity scoreLabelEntity = new Entity(scoreLabelModel);
+        scoreLabel = new Entity(scoreLabelModel);
 //        Entity liveLabelEntity = new Entity(liveLabelModel);
         float size = 1000/148 * .02f;
-        scoreLabelEntity.setScale(size);
+        scoreLabel.setScale(size);
 //        liveLabelEntity.setScale(size);
-        scoreLabelEntity.setPosition(-width + .1f + size, height - .1f, 0);
+        scoreLabel.setPosition(-width + .1f + size, height - .1f, 0);
 //        liveLabelEntity.setPosition(0, 0, 0);
-        elements.add(scoreLabelEntity);
+        elements.add(scoreLabel);
 //        elements.add(liveLabelEntity);
 
     }
@@ -64,6 +66,8 @@ public class HUD {
             numberEntity.setPosition(positionX + i*(scale - scale/16f), positionY, 0);
             allElements.add(numberEntity);
         }
+        float size = 1000/148 * .02f;
+        scoreLabel.setPosition(-width + .1f + size, height - .1f, 0);
 
         return allElements;
     }
