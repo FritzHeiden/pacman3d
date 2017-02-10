@@ -140,13 +140,13 @@ public class GameScene extends Scene {
 //        System.out.println(camera.getRotation().y);
         }
 
-//        Vector3f direction = new Vector3f(
-//                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
-//                0,
-//                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
-//        camera.setPosition(pacman.getPosition());
-//        camera.getPosition().add(direction);
-//        camera.getPosition().add(0, .5f, 0);
+        Vector3f direction = new Vector3f(
+                (float) Math.cos(Math.toRadians(-90 + camera.getRotation().y)),
+                0,
+                (float) Math.sin(Math.toRadians(-90 + camera.getRotation().y))).mul(-.6f);
+        camera.setPosition(pacman.getPosition());
+        camera.getPosition().add(direction);
+        camera.getPosition().add(0, .5f, 0);
 
         pointLights.get(0).setPosition(pacman.getPosition());
 
