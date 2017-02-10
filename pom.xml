@@ -20,8 +20,72 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>sh.tak.appbundler</groupId>
+                <artifactId>appbundle-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <workingDirectory>$APP_PACKAGE/Contents/Resources/Java</workingDirectory>
+                    <jvmOptions>-XstartOnFirstThread</jvmOptions>
+                    <iconFile>icons/pacman.icns</iconFile>
+                    <generateDiskImageFile>true</generateDiskImageFile>
+                    <mainClass>game.Main</mainClass>
+                    <jrePath>/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk</jrePath>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.akathist.maven.plugins.launch4j</groupId>-->
+                <!--<artifactId>launch4j-maven-plugin</artifactId>-->
+                <!--<version>1.7.15</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>l4j-gui</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>launch4j</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<headerType>gui</headerType>-->
+                            <!--<outfile>target/Pacman3D.exe</outfile>-->
+                            <!--&lt;!&ndash;<jar>target/${project.artifactId}-${project.version}.jar</jar>&ndash;&gt;-->
+                            <!--&lt;!&ndash; if <dontWrapJar>true</dontWrapJar> change to this conf <jar>${project.artifactId}-${project.version}.jar</jar> &ndash;&gt;-->
+                            <!--<dontWrapJar>false</dontWrapJar>-->
+                            <!--<errTitle>Error in launch4j plugin</errTitle>-->
+                            <!--<classPath>-->
+                                <!--<mainClass>path.Main</mainClass>-->
+                            <!--</classPath>-->
+                            <!--<icon>src/main/resources/icons/pacman.ico</icon>-->
+                            <!--<jre>-->
+                                <!--&lt;!&ndash;<path>/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk</path>&ndash;&gt;-->
+                                <!--<minVersion>1.8.0</minVersion>-->
+                            <!--</jre>-->
+                            <!--<versionInfo>-->
+                                <!--<fileVersion>1.0.0.0</fileVersion>-->
+                                <!--<txtFileVersion>1.0.0.0</txtFileVersion>-->
+                                <!--<fileDescription>des</fileDescription>-->
+                                <!--<copyright>Copyright (c) 2017 </copyright>-->
+                                <!--<companyName>comp</companyName>-->
+                                <!--<productVersion>1.0.0.0</productVersion>-->
+                                <!--<txtProductVersion>${project.version}</txtProductVersion>-->
+                                <!--<productName>Pacman3D</productName>-->
+                                <!--<internalName>Pacman3D</internalName>-->
+                                <!--<originalFilename>Pacman3D.exe</originalFilename>-->
+                            <!--</versionInfo>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
