@@ -65,6 +65,8 @@ public class Level {
         this.nodeList = new ArrayList<>();
         float scale = .2f;
         float levelHeight = -2f;
+        Material cross = new Material(new Texture("/textures/cross.png"), 1);
+        Material straight = new Material(new Texture("/textures/straight.png"), 1);
         for (int x = 0; x < this.width; x ++) {
             for (int y = 0; y < this.height; y ++) {
                 Block block = new Block(x, y);
@@ -82,21 +84,21 @@ public class Level {
                         breadcrump.setScale(scale/10f);
                         breadcrump.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump);
-                        block.setMaterial(new Material(new Texture("/textures/cross.png"), 1));
+                        block.setMaterial(cross);
                         break;
                     case Level.CONNECTOR_COL:
                         Breadcrump breadcrump0 = new Breadcrump();
                         breadcrump0.setScale(scale/10f);
                         breadcrump0.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump0);
-                        block.setMaterial(new Material(new Texture("/textures/straight.png"), 1));
+                        block.setMaterial(straight);
                         break;
                     case Level.CONNECTOR_ROW:
                         Breadcrump breadcrump1 = new Breadcrump();
                         breadcrump1.setScale(scale/10f);
                         breadcrump1.setPosition(x * scale, levelHeight + .17f, y*scale);
                         this.breadcrumpList.add(breadcrump1);
-                        block.setMaterial(new Material(new Texture("/textures/straight.png"), 1));
+                        block.setMaterial(straight);
                         block.setRotation(0, 90, 0);
                         break;
 

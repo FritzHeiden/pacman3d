@@ -22,7 +22,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class GameScene extends Scene {
 
-    private static final float MOUSE_SENSITIVITY = 0.2f;
+    private static final float MOUSE_SENSITIVITY = 0.3f;
     private final Vector3f cameraInc;
     private final Renderer renderer;
     private final Renderer2D renderer2D;
@@ -98,7 +98,7 @@ public class GameScene extends Scene {
         hud = new HUD(window);
         hud.setScore(51675416);
 
-        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+//        glfwSetInputMode(window.getWindowHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
     @Override
@@ -133,12 +133,12 @@ public class GameScene extends Scene {
 
 
         // Update camera based on mouse            
-//        if (mouseInput.isRightButtonPressed()) {
+        if (mouseInput.isRightButtonPressed()) {
         Vector2f rotVec = mouseInput.getDisplVec();
         camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
 
 //        System.out.println(camera.getRotation().y);
-//        }
+        }
 
         Vector3f direction = new Vector3f(
                 (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
