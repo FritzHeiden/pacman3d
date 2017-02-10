@@ -79,4 +79,9 @@ public class Pacman extends Entity {
     public boolean backToLife() {
         return this.movementStrategy.backToLife();
     }
+
+    @Override
+    public void setPosition(game.entities.Vector3f position) {
+        super.setPosition(position);
+    }
 }

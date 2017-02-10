@@ -67,7 +67,7 @@ public class GameScene extends Scene {
         pacman.setRotation(0, 90, 0);
         this.entities.add(pacman);
 
-        Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(1), this.pacman);
+        Ghost redGhost = new Ghost(Ghost.RED, this.level.getNodeList().get(10), this.pacman);
 //        redGhost.setPosition(-3f, 0, -4);
         this.entities.add(redGhost);
 
@@ -124,7 +124,7 @@ public class GameScene extends Scene {
     @Override
     public void update(float interval, MouseInput mouseInput) {
         // Update camera position
-//        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
+        camera.movePosition(cameraInc.x * CAMERA_POS_STEP, cameraInc.y * CAMERA_POS_STEP, cameraInc.z * CAMERA_POS_STEP);
 
 
         for (Entity entity : entities)
@@ -140,13 +140,13 @@ public class GameScene extends Scene {
 //        System.out.println(camera.getRotation().y);
         }
 
-        Vector3f direction = new Vector3f(
-                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
-                0,
-                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
-        camera.setPosition(pacman.getPosition());
-        camera.getPosition().add(direction);
-        camera.getPosition().add(0, .5f, 0);
+//        Vector3f direction = new Vector3f(
+//                (float) Math.cos(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y)),
+//                0,
+//                (float) Math.sin(Math.toRadians(pacman.getRotation().y + 180 + camera.getRotation().y))).mul(-.6f);
+//        camera.setPosition(pacman.getPosition());
+//        camera.getPosition().add(direction);
+//        camera.getPosition().add(0, .5f, 0);
         pointLights.get(0).setPosition(pacman.getPosition());
 
         if (this.lives == 0)

@@ -156,7 +156,8 @@ public class KeyMovementStrategy extends AbstractMovement {
 
     @Override
     public boolean backToLife() {
-        if(this.getMovingObject().getPosition().closeTo(this.killPosition)) {
+        System.out.println(this.getMovingObject().getPosition() + " " + this.killPosition);
+        if(this.getMovingObject().getPosition().distance(this.killPosition) < .01f) {
             this.setDirection(this.STOP);
             this.getMovingObject().setPosition(this.getCurrentPosition());
             return true;
